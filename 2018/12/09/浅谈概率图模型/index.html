@@ -7,7 +7,7 @@
 
 <html class="theme-next gemini use-motion" lang="zh-Hans">
 <head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="UTF-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="theme-color" content="#222">
@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="GitHub,Hexo,博客,">
+  <meta name="keywords" content="Hexo,博客,GitHub,">
 
 
 
@@ -80,7 +80,7 @@
 
 
 <meta name="description" content="概率图模型（PGM），简称图模型，是指一种用图结构来描述多元随机变量之间条件独立性的概率模型，从而给研究高维空间带来了很大的方便。 对于一个高维随机变量，X=[X1,X2,…,XK]T，我们假设每个变量为离散变量并有m个取值，在不做任何条件独立性假设下，则需要mK-1个参数才能表示其概率分布其联合分布，当m=2,K=100时，参数量约为1030远远超出了计算机的存储能力。 一个有效减少模型参数的方">
-<meta name="keywords" content="GitHub,Hexo,博客">
+<meta name="keywords" content="Hexo,博客,GitHub">
 <meta property="og:type" content="article">
 <meta property="og:title" content="浅谈概率图模型">
 <meta property="og:url" content="http://yoursite.com/2018/12/09/浅谈概率图模型/index.html">
@@ -126,7 +126,7 @@
 
 
 
-  <title>浅谈概率图模型 | MuMaXu's Blog</title>
+  <title>浅谈概率图模型 | MuMaXu's Blog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -145,7 +145,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -376,11 +376,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/GitHub/" rel="tag"># GitHub</a>
-          
             <a href="/tags/Hexo/" rel="tag"># Hexo</a>
           
             <a href="/tags/博客/" rel="tag"># 博客</a>
+          
+            <a href="/tags/GitHub/" rel="tag"># GitHub</a>
           
         </div>
       
@@ -402,6 +402,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/12/09/隐马尔科夫模型/" rel="prev" title="隐马尔科夫模型">
+                隐马尔科夫模型 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -776,6 +780,28 @@ var jiathis_config={
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
 
   
 
