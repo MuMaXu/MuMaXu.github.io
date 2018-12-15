@@ -577,7 +577,7 @@
 <p>具体语法参看：<a href="https://www.appinn.com/markdown/" target="_blank" rel="noopener">Markdown 语法说明(简体中文版)</a> 可以说十分钟就可以入门。当然，工欲善其事必先利其器，选择一个好的 <code>Markdown</code> 编辑器也是非常重要的，这里推荐 <a href="http://www.markdownpad.com/" target="_blank" rel="noopener"><code>MarkdownPad</code></a>，这是带有预览效果的编辑器，也可以使用本地的文本编辑器，更多的 <code>Markdown</code> 的语法与编辑器自己可以搜索了解。</p>
 <h4 id="创建一篇博文"><a href="#创建一篇博文" class="headerlink" title="创建一篇博文"></a>创建一篇博文</h4><p>执行如下命令：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">'blog_name'</span> <span class="comment"># blog_name填入文章名字</span></span><br></pre></td></tr></table></figure>
-<p>hexo会帮我们在 <code>..\hexo\source\\_posts</code> 下生成相关 <code>md</code> 文件，每一篇博客对应一个 <code>md</code> 文件。直接使用编辑器打开 <code>md</code> 文件可以直接编辑。</p>
+<p>hexo会帮我们在 <code>..\hexo\source\_posts</code> 下生成相关 <code>md</code> 文件，每一篇博客对应一个 <code>md</code> 文件。直接使用编辑器打开 <code>md</code> 文件可以直接编辑。</p>
 <h4 id="config-yml"><a href="#config-yml" class="headerlink" title="_config.yml"></a>_config.yml</h4><p>网站配置信息，也就是本文所称的<strong>站点配置文件</strong>，可以在此配置大部分的参数。基本配置在前面基本已经设置过了。</p>
 <h4 id="scaffolds"><a href="#scaffolds" class="headerlink" title="scaffolds"></a>scaffolds</h4><p>模版文件夹。新建文章时，<code>Hexo</code> 会根据 <code>scaffold</code> 来建立文件。默认的模板有三种 draft.md 、 page.md 和 post.md，我们自己也可以在该文件夹下创建属于自己定制的模板，推荐格式如下：</p>
 <ul>
@@ -746,23 +746,30 @@
       
         
           
-            <h1 id="隐马尔科夫模型定义"><a href="#隐马尔科夫模型定义" class="headerlink" title="隐马尔科夫模型定义"></a>隐马尔科夫模型定义</h1><p>隐马尔可夫模型是关于<strong>时序</strong>的概率模型，描述由一个隐藏的马尔可夫链随机生成不可观测的状态随机序列，再由各个状态生成一个观测而产生观测随机序列的过程。隐藏的马尔可夫链随机生成的状态的序列，称为状态序列（state sequence);每个状态生成一个观测，而由此产生的观测的随机序列，称为观测序列（observation sequence)。序列的每一个位置又可以看作是一个时刻。</p>
+            <h1 id="隐马尔科夫模型定义"><a href="#隐马尔科夫模型定义" class="headerlink" title="隐马尔科夫模型定义"></a>隐马尔科夫模型定义</h1><p>隐马尔可夫模型(hidden Markov model,HMM)是关于<strong>时序</strong>的概率模型，描述由一个隐藏的马尔可夫链随机生成不可观测的状态随机序列，再由各个状态生成一个观测而产生观测随机序列的过程。隐藏的马尔可夫链随机生成的状态的序列，称为状态序列（state sequence);每个状态生成一个观测，而由此产生的观测的随机序列，称为观测序列（observation sequence)。序列的每一个位置又可以看作是一个时刻。</p>
 <h2 id="隐马尔科夫模型的数学表达"><a href="#隐马尔科夫模型的数学表达" class="headerlink" title="隐马尔科夫模型的数学表达"></a>隐马尔科夫模型的数学表达</h2><p>设Q是所有可能的状态的集合，V是所有可能的观测的集合。</p>
-<p>其中，N是可能的状态数，M是可能的观测数。</p>
-<p>状态q是不可见的，观测v是可见的。</p>
-<p>I是长度为T的状态序列，O是对应的观测序列。</p>
-<p>我们继续定义A为状态转移概率矩阵：</p>
-<p>其中，</p>
-<p>是在时刻t处于状态qi的条件下在时刻t+1转移到状态qj的概率。</p>
+<center>$Q=\lbrace q_1,q_2,…,q_N\rbrace$,$V=\lbrace v_1,v_2,…,v_M\rbrace$</center>
+
+<p>其中，N是可能的状态数，M是可能的观测数。状态q是不可见的，观测v是可见的。</p>
+<p><strong><em>I</em></strong>是长度为<strong>T</strong>的状态序列，<strong>O</strong>是对应的观测序列。</p>
+<center>$I=\lbrace i_1,i_2,…,i_T\rbrace$,$O=\lbrace o_1,o_2,…,o_T\rbrace$ </center>
+
+<p>A为状态转移概率矩阵：</p>
+<center>$A=[a_{ij}]_{N*N}$ </center>
+
+<p>其中:</p>
+<p>$a_{ij}=P(i_{t+1}=q_j|i_i=q_i)$,  $i=1,2,…,N;j=1,2,…,N$是在时刻t处于状态$q_i$的条件下在时刻t+1转移到状态$q_j$的概率。</p>
 <p>B是观测概率矩阵:</p>
+<p>$B=[b_j(k)]_{N*M}$</p>
 <p>其中，</p>
-<p>是在时刻t处于状态qj的条件下生成观测vk的概率（也就是所谓的“发射概率”）。</p>
-<p>所以我们在其它资料中，常见到的生成概率与发射概率其实是一个概念。</p>
-<p>π是初始状态概率向量：</p>
-<p>其中，</p>
+<p>$b_j(k)=P(o_t=v_k|i_t=q_j)$,       $k=1,2,…,M;j=1,2,…,N$是在时刻t处于状态$q_j$的条件下生成观测$v_k$的概率（也就是所谓的“发射概率”）,在其它资料中，常见到的生成概率与发射概率其实是一个概念。</p>
+<p>$\pi$是初始状态概率向量：$\pi=(\pi_i)$</p>
+<p>其中，$\pi=P(i_1=q_i)$     $i=1,2,…,N$是t=1时刻处于状态$q_i$的概率</p>
 <p>隐马尔可夫模型由初始状态概率向量π、状态转移概率矩阵A和观测概率矩阵B决定。π和A决定状态序列，B决定观测序列。因此，隐马尔可夫模型可以用三元符号表示，即</p>
+<p>$\lambda=(A,B,\pi)$</p>
 <p>称为隐马尔可夫模型的三要素。<br>如果加上一个具体的状态集合Q和观测序列V，构成了HMM的五元组，这也是隐马尔科夫模型的所有组成部分。</p>
-<h2 id="HMM在NLP中的应用"><a href="#HMM在NLP中的应用" class="headerlink" title="HMM在NLP中的应用"></a>HMM在NLP中的应用</h2><p>1、应用到词性标注中，v代表词语，是可以观察到的。q代表我们要预测的词性（一个词可能对应多个词性）是隐含状态。<br>2、应用到分词中，v代表词语，是可以观察的。q代表我们的标签（B,E这些标签，代表一个词语的开始，或者中间等等）</p>
+<h2 id="HMM在NLP中的应用"><a href="#HMM在NLP中的应用" class="headerlink" title="HMM在NLP中的应用"></a>HMM在NLP中的应用</h2><p>HMM是可用于标注问题的统计学习模型，描述由隐藏的马尔可夫链随机生成观测序列的过程</p>
+<p>1、应用到词性标注中，v代表词语，是可以观察到的。q代表我们要预测的词性（一个词可能对应多个词性）是隐含状态。<br>2、应用到分词中，v代表词语，是可以观察的。q代表我们的标签（B,E这些标签，代表一个词语的开始，或者中间等等）</p>
 <p>3、应用到命名实体识别中，v代表词语，是可以观察的。q代表我们的标签（标签代表着地点词，时间词这些）</p>
 <h2 id="HMM实例解释"><a href="#HMM实例解释" class="headerlink" title="HMM实例解释"></a>HMM实例解释</h2><p>假设我手里有三个不同的骰子。第一个骰子是我们平常见的骰子（称这个骰子为D6），6个面，每个面（1，2，3，4，5，6）出现的概率是1/6。第二个骰子是个四面体（称这个骰子为D4），每个面（1，2，3，4）出现的概率是1/4。第三个骰子有八个面（称这个骰子为D8），每个面（1，2，3，4，5，6，7，8）出现的概率是1/8。<br><img src="http://images0.cnblogs.com/blog/133059/201507/161450305163828.png" alt=""></p>
 <p>假设我们开始掷骰子，我们先从三个骰子里挑一个，挑到每一个骰子的概率都是1/3。然后我们掷骰子，得到一个数字，1，2，3，4，5，6，7，8中的一个。不停的重复上述过程，我们会得到一串数字，每个数字都是1，2，3，4，5，6，7，8中的一个。例如我们可能得到这么一串数字（掷骰子10次）：1 6 3 5 2 7 3 5 2 4</p>
@@ -1120,7 +1127,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">标签</span>
                 
               </div>
