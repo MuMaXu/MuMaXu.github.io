@@ -116,7 +116,7 @@
 <meta property="og:image" content="https://i.loli.net/2018/12/15/5c14f16b23289.png">
 <meta property="og:image" content="https://i.loli.net/2018/12/15/5c14f19d2f578.png">
 <meta property="og:image" content="https://i.loli.net/2018/12/15/5c14e99c3af00.png">
-<meta property="og:updated_time" content="2018-12-15T12:47:36.310Z">
+<meta property="og:updated_time" content="2018-12-15T12:56:12.556Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="隐马尔科夫模型">
 <meta name="twitter:description" content="隐马尔科夫模型定义隐马尔可夫模型(hidden Markov model,HMM)是关于时序的概率模型，描述由一个隐藏的马尔可夫链随机生成不可观测的状态随机序列，再由各个状态生成一个观测而产生观测随机序列的过程。隐藏的马尔可夫链随机生成的状态的序列，称为状态序列（state sequence);每个状态生成一个观测，而由此产生的观测的随机序列，称为观测序列（observation sequence">
@@ -383,6 +383,7 @@
 <center>$\lambda=(A,B,\pi)$</center>
 
 <p>$A,B,\pi$称为隐马尔可夫模型的三要素。如果加上一个具体的状态集合Q和观测序列V，构成了HMM的五元组，这也是隐马尔科夫模型的所有组成部分。</p>
+<p>&lt; !–more–&gt;</p>
 <h2 id="HMM在NLP中的应用"><a href="#HMM在NLP中的应用" class="headerlink" title="HMM在NLP中的应用"></a>HMM在NLP中的应用</h2><p>HMM是可用于标注问题的统计学习模型，描述由隐藏的马尔可夫链随机生成观测序列的过程</p>
 <p>1、应用到词性标注中，v代表词语，是可以观察到的。q代表我们要预测的词性（一个词可能对应多个词性）是隐含状态。<br>2、应用到分词中，v代表词语，是可以观察的。q代表我们的标签（B,E这些标签，代表一个词语的开始，或者中间等等）</p>
 <p>3、应用到命名实体识别中，v代表词语，是可以观察的。q代表我们的标签（标签代表着地点词，时间词这些）</p>
@@ -487,7 +488,7 @@
 <p>3、EM算法的M步：极大化$Q$函数$Q(\lambda,\bar\lambda)$求模型参数$A,B,\pi$由于要极大化的参数在式（10.34）中单独地出现在3个项中，所以只需对各项分别极大化。最后求得结果为：</p>
 <center>$\pi_i=\frac{P(O,i_1=i|\bar{\lambda})}{P(O|\bar{\lambda})}$</center>
 
-<center>$\frac{\sum_{t=1}^{T-1}P(O,i_t=i,i_{t+1}=j|\bar\lambda)}{\sum_{t=1}^{T-1}P(O,i_t=i,|\bar\lambda)}$</center>
+<center>$a_{ij}=\frac{\sum_{t=1}^{T-1}P(O,i_t=i,i_{t+1}=j|\bar\lambda)}{\sum_{t=1}^{T-1}P(O,i_t=i,|\bar\lambda)}$</center>
 
 <center>$b_j(k)=\frac{\sum_{t=1}^{T}P(O,i_t=j|\bar\lambda)I(o_t=v_k)}{\sum_{t=1}^{T}P(O,i_t=j,|\bar\lambda)}$</center>
 
@@ -625,8 +626,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/12/08/stroy/" rel="next" title="stroy">
-                <i class="fa fa-chevron-left"></i> stroy
+              <a href="/2018/12/09/GitHub-Hexo-从零开始搭建个人博客/" rel="next" title="GitHub + Hexo 从零开始搭建个人博客">
+                <i class="fa fa-chevron-left"></i> GitHub + Hexo 从零开始搭建个人博客
               </a>
             
           </div>
@@ -635,8 +636,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/12/09/GitHub-Hexo-从零开始搭建个人博客/" rel="prev" title="GitHub + Hexo 从零开始搭建个人博客">
-                GitHub + Hexo 从零开始搭建个人博客 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/12/09/浅谈概率图模型/" rel="prev" title="浅谈概率图模型">
+                浅谈概率图模型 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
