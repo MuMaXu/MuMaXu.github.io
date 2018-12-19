@@ -92,7 +92,7 @@
 <meta property="og:image" content="https://i.loli.net/2018/12/19/5c19ffc38fa79.png">
 <meta property="og:image" content="https://i.loli.net/2018/12/19/5c19f58cdfc52.png">
 <meta property="og:image" content="https://i.loli.net/2018/12/19/5c19f68ac2929.png">
-<meta property="og:updated_time" content="2018-12-19T12:34:36.763Z">
+<meta property="og:updated_time" content="2018-12-19T12:43:04.291Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="EM算法详解">
 <meta name="twitter:description" content="背景实例假从学校抽取了200名学生，现在我们的工作就是要确定这200个学生中每个学生是属于男生还是属于女生，并且求出是男生这个分布的参数，要求出是女生这个分布参数。 EM算法就是这样，假设我们想估计知道A和B两个参数，在开始状态下二者都是未知的，但如果知道了A的信息就可以得到B的信息，反过来知道了B也就得到了A。可以考虑首先赋予A某种初值，以此得到B的估计值，然后从B的当前值出发，重新估计A的取值">
@@ -340,23 +340,17 @@
 <p>EM算法就是这样，假设我们想估计知道A和B两个参数，在开始状态下二者都是未知的，但如果知道了A的信息就可以得到B的信息，反过来知道了B也就得到了A。可以考虑首先赋予A某种初值，以此得到B的估计值，然后从B的当前值出发，重新估计A的取值，这个过程一直持续到收敛为止。这里的A可以理解为每一个样本它的分布情况，即是属于男生还是属于女生。</p>
 <p> EM的意思是“ExpectationMaximization”，在我们上面这个问题里面，我们是先随便猜一下男生（身高）的正态分布的参数：如均值和方差是多少。例如男生的均值是1米7，方差是0.1米（当然了，刚开始肯定没那么准），然后计算出每个人更可能属于第一个还是第二个正态分布中的（例如，这个人的身高是1米8，那很明显，他最大可能属于男生的那个分布），这个是属于Expectation一步。有了每个人的归属，或者说我们已经大概地按上面的方法将这200个人分为男生和女生两部分，我们就可以根据之前说的最大似然那样，通过这些被大概分为男生的n个人来重新估计第一个分布的参数，女生的那个分布同样方法重新估计。这个是Maximization。然后，当我们更新了这两个分布的时候，每一个属于这两个分布的概率又变了，那么我们就再需要调整E步……如此往复，直到参数基本不再发生变化为止。</p>
 <h1 id="Jensen不等式"><a href="#Jensen不等式" class="headerlink" title="Jensen不等式"></a>Jensen不等式</h1><p> 回顾优化理论中的一些概念。设f是定义域为实数的函数，如果对于所有的实数$x$，$f^{‘’}\ge 0$，那么f是凸函数。当x是向量时，如果其hessian矩阵H是半正定的（H&gt;0），那么f是凸函数。如果$f^{‘’}\ge 0$或者（H&gt;0），那么称f是严格凸函数。</p>
-<pre><code>  Jensen不等式表述如下：
-
-  如果f是凸函数，X是随机变量，那么
-
- $E(f(x))\ge f(E(x))$
-
-  特别地，如果f是严格凸函数，那么$E(f(x))= f(E(x))$当且仅当$p(x=E(x))=1$，也就是说X是常量。
-
-  这里我们将$f(E(f(x)))$简写为$f(EX)$
-
-  如果用图表示会很清晰：
-</code></pre><p><img src="https://i.loli.net/2018/12/19/5c19e399c985b.png" alt=""></p>
+<p>Jensen不等式表述如下：</p>
+<p>如果f是凸函数，X是随机变量，那么</p>
+<p>$E(f(x))\ge f(E(x))$</p>
+<p> 特别地，如果f是严格凸函数，那么$E(f(x))= f(E(x))$当且仅当$p(x=E(x))=1$，也就是说X是常量。</p>
+<p>这里我们将$f(E(f(x)))$简写为$f(EX)$</p>
+<p>如果用图表示会很清晰：</p>
+<p><img src="https://i.loli.net/2018/12/19/5c19e399c985b.png" alt=""></p>
 <p> 图中，实线f是凸函数，X是随机变量，有0.5的概率是a，有0.5的概率是b。（就像掷硬币一样）。X的期望值就是a和b的中值了，图中可以看到$E(f(x))\ge f(E(x))$成立。</p>
-<pre><code>  当f是（严格）凹函数当且仅当-f是（严格）凸函数。
-
-  Jensen不等式应用于凹函数时，不等号方向反向，也就是$E(f(x))\le f(E(x))$
-</code></pre><h1 id="为什么要有EM算法"><a href="#为什么要有EM算法" class="headerlink" title="为什么要有EM算法"></a>为什么要有EM算法</h1><p>我把EM算法当做最大似然估计的拓展，解决难以给出解析解的最大似然估计（MLE）问题。 考虑高斯分布，它的最大似然估计是这样的：</p>
+<p>当f是（严格）凹函数当且仅当-f是（严格）凸函数。</p>
+<p> Jensen不等式应用于凹函数时，不等号方向反向，也就是$E(f(x))\le f(E(x))$</p>
+<h1 id="为什么要有EM算法"><a href="#为什么要有EM算法" class="headerlink" title="为什么要有EM算法"></a>为什么要有EM算法</h1><p>我把EM算法当做最大似然估计的拓展，解决难以给出解析解的最大似然估计（MLE）问题。 考虑高斯分布，它的最大似然估计是这样的：</p>
 <p>$\theta ^ {\star} = \arg \max _ { \theta } \sum _ { X } \log L ( \theta | X )$</p>
 <p>其中：$ \theta = ( \mu , \sigma ) , \theta ^ { \star } = \left( \mu ^ {\star} , \sigma ^ {\star} \right) , \log L ( \theta | X ) = \log P ( X ; \theta )$是对数似然函数，分号左边是随机变量，右边是模型参数。 $P ( X ; \theta )$表示X的概率值函数，它是一个以$\theta$为参数的函数（很多人看不懂EM算法就是因为符号问题）。这里对 求导很容易$\theta $解出 $\theta^{\star}$。</p>
 <p>如果这是个含有隐量Z的模型比如混合高斯模型，$P ( X ; \theta ) = \sum _ { k = 1 } ^ { K } \pi _ { k } N \left( x ; \mu _ { k } , \sigma _ { k } \right) = \sum _ { Z } P ( Z ; \pi ) P ( X | Z ; \mu , \sigma )$</p>
@@ -365,7 +359,7 @@
 <p>$P \left( Z = z _ { 2 } \right) = \pi _ { 2 }$</p>
 <p>$…$</p>
 <p>$P \left( Z = z _ { K } \right) = \pi _ { K }$</p>
-<p>可以认为，混合高斯分布的观测值是这样产生的：先以概率$\pi_K$抽取一个高斯分布$z_k$ ，再以该高斯分布 $N \left( x ; \mu _ { k } , \sigma _ { k } \right)$，去生成观测x。其实这里的$\pi_k$就Z的先验分布$P ( Z ; \pi )$ (这里特地加上；$\pi$ 表示P(Z)的参数是你需要求出才能表示这个先验分布),而$N \left( x ; \mu _ { k } , \sigma _ { k } \right)$就是给定Z下的条件概率$P ( X | Z ; \mu , \sigma )$， 这时，令$\theta = ( \mu , \sigma , \pi ) , \theta ^ { <em> } = \left( \mu ^ { </em> } , \sigma ^ { <em> } , \pi ^ { </em> } \right)$最大似然估计变成了</p>
+<p>可以认为，混合高斯分布的观测值是这样产生的：先以概率$\pi_K$抽取一个高斯分布$z_k$ ，再以该高斯分布$N \left( x ; \mu _ { k } , \sigma _ { k } \right)$，去生成观测x。其实这里的$\pi_k$就Z的先验分布$P ( Z ; \pi )$ (这里特地加上；$\pi$ 表示P(Z)的参数是你需要求出才能表示这个先验分布),而$N \left( x ; \mu _ { k } , \sigma _ { k } \right)$就是给定Z下的条件概率$P ( X | Z ; \mu , \sigma )$， 这时，令$\theta = ( \mu , \sigma , \pi ) , \theta ^ { <em> } = \left( \mu ^ { </em> } , \sigma ^ { <em> } , \pi ^ { </em> } \right)$最大似然估计变成了</p>
 <p>$\theta ^ { * } = \arg \max _ { \theta } \sum _ { X } \log P ( X ; \theta )$  </p>
 <p>​    $ \begin{array} { l } { = \arg \max _ { \theta } \sum _ { X } ^ { K } \log \sum _ { Z } P ( Z ; \pi ) P ( X | Z ; \mu , \sigma ) } \\ { = \arg \max _ { \theta } \sum _ { X } \log \sum _ { Z } P ( X , Z ; \theta ) } \end{array}$</p>
 <h1 id="EM算法"><a href="#EM算法" class="headerlink" title="EM算法"></a>EM算法</h1><p>给定的训练样本是${x^{(1)},x^{(2)},…,x^{(m)}}$，样例间独立但每个样本i对应的类别z(i)是未知的（相当于聚类），也即隐含变量。故我们需要估计概率模型p(x,z)的参数θ，但是由于里面包含隐含变量z，所以很难用最大似然求解，但如果z知道了，那我们就很容易求解了。 对于参数估计，我们本质上还是想获得一个使似然函数最大化的那个参数θ，现在与最大似然不同的只是似然函数式中多了一个未知的变量z，也就是说我们的目标是找到适合的θ和z让L(θ)最大。那我们也许会想，你就是多了一个未知的变量而已啊，我也可以分别对未知的θ和z分别求偏导，再令其等于0，求解出来不也一样吗？</p>
@@ -391,12 +385,12 @@
 <p>c为常数，不依赖于$z ^ { ( i ) }$。对此式子做进一步推导，我们知道$\Sigma _ { z } Q _ { i } \left( z ^ { ( 1 ) } \right) = 1$，那么也就有$\sum _ { z } p \left( x ^ { ( \mathrm { i } ) } , z ^ { ( i ) } ; \theta \right) = c$，（多个等式分子分母相加不变，这个认为每个样例的两个概率比值都是c），那么有下式：</p>
 <p>$\begin{aligned} Q _ { i } \left( z ^ { ( i ) } \right) &amp; = \frac { p \left( x ^ { ( i ) } , z ^ { ( i ) } ; \theta \right) } { \sum _ { z } p \left( x ^ { ( i ) } , z ; \theta \right) } \\ &amp; = \frac { p \left( x ^ { ( i ) } , z ^ { ( i ) } ; \theta \right) } { p \left( x ^ { ( i ) } ; \theta \right) } \\ &amp; = p \left( z ^ { ( i ) } | x ^ { ( i ) } ; \theta \right) \end{aligned}$</p>
 <p>至此，我们推出了在固定其他参数$\theta$后，$Q _ { \mathrm { i } } \left( z ^ { ( \mathrm { i } ) } \right)$的计算公式就是<strong>后验概率</strong>，解决了$Q _ { \mathrm { i } } \left( z ^ { ( \mathrm { i } ) } \right)$如何选择的问题。这一步就是E步，建立$\ell ( \theta )$的下界。接下来的M步，就是在给定$Q _ { \mathrm { i } } \left( z ^ { ( \mathrm { i } ) } \right)$后，调整$Q _ { \mathrm { i } } \left( z ^ { ( \mathrm { i } ) } \right)$，去极大化$\ell ( \theta )$的下界（在固定后，下界还可以调整的更大）。那么一般的EM算法的步骤如下：</p>
-<p>​                      给定一个初始分布参数</p>
-<p>​                      循环重复直到收敛 {</p>
-<pre><code>                                   （E步）对于每一个i，计算
-</code></pre><p>​                                                           $Q _ { i } \left( z ^ { ( 1 ) } \right) : = p \left( z ^ { ( i ) } | x ^ { ( i ) } ; \theta \right)$</p>
-<p>​                                        （M步）计算</p>
-<p>​                                                           $\theta : = \arg \max _ { \theta } \sum _ { i } \sum _ { z ^ { ( i ) } } Q _ { i } \left( z ^ { ( i ) } \right) \log \frac { p \left( x ^ { ( i ) } , z ^ { ( i ) } ; \theta \right) } { Q _ { i } \left( z ^ { ( i ) } \right) }$</p>
+<p>给定一个初始分布参数</p>
+<p>循环重复直到收敛 {</p>
+<p>（E步）对于每一个i，计算</p>
+<p> $Q _ { i } \left( z ^ { ( 1 ) } \right) : = p \left( z ^ { ( i ) } | x ^ { ( i ) } ; \theta \right)$</p>
+<p>（M步）计算</p>
+<p> $\theta : = \arg \max _ { \theta } \sum _ { i } \sum _ { z ^ { ( i ) } } Q _ { i } \left( z ^ { ( i ) } \right) \log \frac { p \left( x ^ { ( i ) } , z ^ { ( i ) } ; \theta \right) } { Q _ { i } \left( z ^ { ( i ) } \right) }$</p>
 <h1 id="从EM算法的视角审视混合高斯模型"><a href="#从EM算法的视角审视混合高斯模型" class="headerlink" title="从EM算法的视角审视混合高斯模型"></a>从EM算法的视角审视混合高斯模型</h1><h2 id="什么是高斯混合模型"><a href="#什么是高斯混合模型" class="headerlink" title="什么是高斯混合模型"></a>什么是高斯混合模型</h2><p>高斯混合模型（Gaussian Mixed Model）指的是多个高斯分布函数的线性组合，理论上GMM可以拟合出任意类型的分布，通常用于解决同一集合下的数据包含多个不同的分布的情况（或者是同一类分布但参数不一样，或者是不同类型的分布，比如正态分布和伯努利分布）。</p>
 <h2 id="高斯混合模型的数学表达式"><a href="#高斯混合模型的数学表达式" class="headerlink" title="高斯混合模型的数学表达式"></a>高斯混合模型的数学表达式</h2><p>设有随机变量Х，则混合高斯模型可以用下式表示：</p>
 <p>$\mathrm { p } ( \mathrm { x } ) = \sum _ { k = 1 } ^ { K } \pi _ { k } N ( x | \mu _ { k } , \Sigma _ { k } )$        </p>
@@ -413,14 +407,13 @@
 <p>简单解释就是每个样例i的隐含类别$z^{(i)}$为j的概率可以通过后验概率计算得到。</p>
 <pre><code>  在M步中，我们需要在固定$Q _ { i } \left( z ^ { ( i ) } \right)$后最大化最大似然估计，也就是
 </code></pre><p><img src="https://i.loli.net/2018/12/19/5c19f58cdfc52.png" alt=""></p>
-<p>这是将$z^{(i)}$的k种情况展开后的样子，未知参数$\emptyset _ { j } $, $\mu _ { j }$ 和$\Sigma _ { j }$。</p>
-<pre><code>  固定$\emptyset _ { j }$ 和$\Sigma _ { j }$，对$\mu _ { j }$求导得:
-</code></pre><p><img src="https://i.loli.net/2018/12/19/5c19f68ac2929.png" alt=""></p>
+<p>这是将$z^{(i)}$的k种情况展开后的样子，未知参数$\emptyset _ { j } $, $\mu _ { j }$ 和$\Sigma _ { j }$。固定$\emptyset _ { j }$ 和$\Sigma _ { j }$，对$\mu _ { j }$求导得:</p>
+<p><img src="https://i.loli.net/2018/12/19/5c19f68ac2929.png" alt=""></p>
 <p>等于0时，得到</p>
 <p>$\mu _ { l } : = \frac { \sum _ { i = 1 } ^ { m } w _ { l } ^ { ( i ) } x ^ { ( i ) } } { \sum _ { i = 1 } ^ { m } w _ { l } ^ { ( i ) } }$</p>
 <p>这就是我们之前模型中$\mu$的更新公式。</p>
-<pre><code>  然后推导$Q _ { j }$的更新公式(省略了步骤):
-</code></pre><p>$\phi _ { j } : = \frac { 1 } { m } \sum _ { i = 1 } ^ { m } w _ { j } ^ { ( i ) }$</p>
+<p>然后推导$Q _ { j }$的更新公式(省略了步骤):</p>
+<p>$\phi _ { j } : = \frac { 1 } { m } \sum _ { i = 1 } ^ { m } w _ { j } ^ { ( i ) }$</p>
 <h1 id="一个栗子"><a href="#一个栗子" class="headerlink" title="一个栗子"></a>一个栗子</h1><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>公司有很多领导=[A总，刘总，C总]，同时有很多漂亮的女职员=[小甲，小章，小乙]。（请勿对号入座）你迫切的怀疑这些老总跟这些女职员有问题。为了科学的验证你的猜想，你进行了细致的观察。于是，</p>
 <h2 id="观察数据"><a href="#观察数据" class="headerlink" title="观察数据"></a>观察数据</h2><p>1）A总，小甲，小乙一起出门了；<br>2）刘总，小甲，小章一起出门了；<br>3）刘总，小章，小乙一起出门了；<br>4）C总，小乙一起出门了；</p>
 <h2 id="神秘的EM计算"><a href="#神秘的EM计算" class="headerlink" title="神秘的EM计算"></a>神秘的EM计算</h2><p>初始化，你觉得三个老总一样帅，一样有钱，三个美女一样漂亮，每个人都可能跟每个人有关系。所以，每个老总跟每个女职员“有问题”的概率都是1/3;</p>
