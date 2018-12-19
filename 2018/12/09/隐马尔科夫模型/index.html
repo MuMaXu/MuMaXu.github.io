@@ -116,7 +116,7 @@
 <meta property="og:image" content="https://i.loli.net/2018/12/15/5c14f16b23289.png">
 <meta property="og:image" content="https://i.loli.net/2018/12/15/5c14f19d2f578.png">
 <meta property="og:image" content="https://i.loli.net/2018/12/15/5c14e99c3af00.png">
-<meta property="og:updated_time" content="2018-12-15T16:02:05.846Z">
+<meta property="og:updated_time" content="2018-12-17T03:41:55.965Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="隐马尔科夫模型">
 <meta name="twitter:description" content="隐马尔科夫模型定义隐马尔可夫模型(hidden Markov model,HMM)是关于时序的概率模型，描述由一个隐藏的马尔可夫链随机生成不可观测的状态随机序列，再由各个状态生成一个观测而产生观测随机序列的过程。隐藏的马尔可夫链随机生成的状态的序列，称为状态序列（state sequence);每个状态生成一个观测，而由此产生的观测的随机序列，称为观测序列（observation sequence">
@@ -403,14 +403,14 @@
 <h1 id="概率计算问题"><a href="#概率计算问题" class="headerlink" title="概率计算问题"></a>概率计算问题</h1><h2 id="前向算法"><a href="#前向算法" class="headerlink" title="前向算法"></a>前向算法</h2><p><strong>前向概率：</strong>给定隐马尔可夫模型$\lambda$，定义到时刻t部分观测序列为$o_1,o_2,…,o_t$且状态为$q_i$的概率为前向概率，记作</p>
 <center>$\alpha_t(i)=P(o_1,o_2,…,o_t,i_t=q_i|\lambda)$</center>
 
-<p>可以递推地求得前向概率$\alpha(i)$及观测序列概率$P(O|\pi)$</p>
+<p>可以递推地求得前向概率$\alpha_t(i)$及观测序列概率$P(O|\pi)$</p>
 <p>输入：隐马尔可夫模型$\lambda$ ,观测序列$O$</p>
 <p>输出：观测序列概率 <img src="http://www.zhihu.com/equation?tex=P%28O%7C%5Clambda%29+" alt="P(O|\lambda) "></p>
 <p><strong>1.初值</strong></p>
  <center>$\alpha_1(i)=\pi_ib_i(o_1)$,     $i=1,2,…,N$    </center>
 
 <p><strong>2.递推</strong>     对$t=1,2,…,T-1,$</p>
-<center>$\alpha_{t+1}(i)=[\sum_{i=1}^n\alpha_t(j)a_{ji}]b_i(o_{t+1})$</center>
+<center>$\alpha_{t+1}(i)=[\sum_{j=1}^N\alpha_t(j)a_{ji}]b_i(o_{t+1})$</center>
 
 <p>公式的意思就是当前观测结点的概率，其实是上一个观测结点的概率 乘以 转移概率（描述的是如何从上一个结点到当前结点的，有N种走法可以到当前结点，求他们的概率和）最后再乘以当前观测对应发射矩阵内的值</p>
 <p><strong>3.终止</strong></p>
@@ -420,9 +420,9 @@
 <p>前向算法主要考虑前一个状态结点的概率（递推的内容），到达当前结点的走法（转移矩阵），当前观测和状态结点之间的关系（发射矩阵），将得到观测的各种可能走法综合起来（求和），就是一步一步从初值走到终点</p>
 <p>观察递推项，有木有觉得前向算法和维特比算法的递推项很相似，涉及到的都是前一个状态结点的概率、到达当前结点的“走法”（转移矩阵）、当前观测和当前状态的关系（发射矩阵）。不同的是，前向算法是“综合”各种可能情况，维特比算法是“挑选最优，动态规划”的思维，这个不同也体现在公式中，前者是$\sum$，后者是$max$</p>
 <h2 id="后向算法"><a href="#后向算法" class="headerlink" title="后向算法"></a>后向算法</h2><p><strong>后向概率：</strong>给定隐马尔可夫模型$\pi$，定义在时刻t状态为$q_i$的条件下，从$t$到$T$的部分观测序列为$o_{t+1},o_{t+2},…,o_T$的概率为后向概率，记作</p>
-<center>$\beta_t(i)=P(o_{t+1},o_{t+2},…,o_T|i_T=q_i,\lambda)$</center>
+<center>$\beta_t(i)=P(o_{t+1},o_{t+2},…,o_T|i_t=q_i,\lambda)$</center>
 
-<p>可以递推地求得前向概率$\beta(i)$及观测序列概率$P(O|\pi)$</p>
+<p>可以递推地求得前向概率$\beta_t(i)$及观测序列概率$P(O|\lambda)$</p>
 <p>输入：隐马尔可夫模型$\lambda$ ,观测序列$O$</p>
 <p>输出：观测序列概率 <img src="http://www.zhihu.com/equation?tex=P%28O%7C%5Clambda%29+" alt="P(O|\lambda) "></p>
 <p><strong>1.初值</strong></p>
@@ -433,7 +433,7 @@
 
 <p>公式的意思就是，当前的状态的概率跟后一个状态的概率和观测有关，同时要考虑多种（N种）当前状态向后一个状态的转移</p>
 <p><strong>3.终止</strong></p>
-<center>$P(O|\lambda)=\sum_{i=1}^N\pi_ib_i(o_1)|\beta_1(i)T(i)$</center>
+<center>$P(O|\lambda)=\sum_{i=1}^N\pi_ib_i(o_1)|\beta_1(i)$</center>
 
 <p>由于初始观测已经确定，所以初始状态在哪个盒子里是由$\pi$和$B$共同决定的，考虑这个因素进去，再“综合”（求和）可以得到观测序列的各种情况，得到最终结果。</p>
 <p>后向算法主要考虑当前状态结点的概率（递推的内容），这个概率与当前结点到后一个结点的“走法”（转移矩阵），后一个观测和状态结点之间的关系（发射矩阵），一步一步向前推理，将得到观测的各种可能走法综合起来（求和），是一个逆向思考的过程。我认为：</p>
@@ -486,7 +486,7 @@
 <p>于是函数$Q(\lambda,\bar\lambda)$可以写成：</p>
 <p>$Q(\lambda,\bar\lambda)=\sum_Ilog\pi_{i_1}P(O,I|\bar{\lambda})+\sum_I(\sum_{t=1}^{T-1}loga_{i_ti_{t+1}})P(O,I|\bar\lambda)+\sum_I(\sum_{t=1}^Tlogb_{i_t}(o_t))P(O,I|\bar\lambda)$</p>
 <p>式中求和都是对所有训练数据的序列总长度T进行的。</p>
-<p>3、EM算法的M步：极大化$Q$函数$Q(\lambda,\bar\lambda)$求模型参数$A,B,\pi$由于要极大化的参数在式（10.34）中单独地出现在3个项中，所以只需对各项分别极大化。最后求得结果为：</p>
+<p>3、EM算法的M步：极大化$Q$函数$Q(\lambda,\bar\lambda)$求模型参数$A,B,\pi$由于要极大化的参数在式中单独地出现在3个项中，所以只需对各项分别极大化。最后求得结果为：</p>
 <center>$\pi_i=\frac{P(O,i_1=i|\bar{\lambda})}{P(O|\bar{\lambda})}$</center>
 
 <center>$a_{ij}=\frac{\sum_{t=1}^{T-1}P(O,i_t=i,i_{t+1}=j|\bar\lambda)}{\sum_{t=1}^{T-1}P(O,i_t=i,|\bar\lambda)}$</center>
@@ -521,7 +521,7 @@
 <center>$\delta_t(i)=max_{i_1,i_2,…,i_{t-1}}P(i_t=i,i_{t-1},…,i_1,o_t,…,o_1|\lambda)$  $i=1,2,…,N$</center>
 
 <p>由定义可得变量$\delta$的递推公式：</p>
-<center>$$\delta_{t+1}(i)=max_{i_1,i_2,…,i_t}P(i_{t+1},i_t,…,i_1,o_{t+1},…,o_1|\lambda) =max_{1\le j \le N}[\delta_t(j)a_{ji}]b_i(o_{t+1})$$</center>
+<center>$$\delta_{t+1}(i)=max_{i_1,i_2,…,i_t}P(i_{t+1}=i,i_t,…,i_1,o_{t+1},…,o_1|\lambda) =max_{1\le j \le N}[\delta_t(j)a_{ji}]b_i(o_{t+1})$$</center>
 
 <p>定义在时刻$t$状态为$i$的所有单个路径$(i_1,i_2,…,i_{t-1},i)$中概率最大的路径的第$t-1$个结点为</p>
 <p><centet>$\Psi_t(i)=arg max_{1\le j\le N}[\delta_{t-1}(j)a_{ji}] $      i=1,2,…,N</centet></p>
