@@ -87,18 +87,16 @@
 <meta property="og:site_name" content="MuMaXu&#39;s Blog">
 <meta property="og:description" content="背景实例假从学校抽取了200名学生，现在我们的工作就是要确定这200个学生中每个学生是属于男生还是属于女生，并且求出是男生这个分布的参数，要求出是女生这个分布参数。 EM算法就是这样，假设我们想估计知道A和B两个参数，在开始状态下二者都是未知的，但如果知道了A的信息就可以得到B的信息，反过来知道了B也就得到了A。可以考虑首先赋予A某种初值，以此得到B的估计值，然后从B的当前值出发，重新估计A的取值">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://images.cnblogs.com/cnblogs_com/jerrylead/201104/201104061615528987.png">
-<meta property="og:image" content="https://images.cnblogs.com/cnblogs_com/jerrylead/201104/20110406161553755.png">
 <meta property="og:image" content="https://i.loli.net/2018/12/19/5c19e399c985b.png">
 <meta property="og:image" content="https://i.loli.net/2018/12/19/5c1a0001a23e6.png">
 <meta property="og:image" content="https://i.loli.net/2018/12/19/5c19ffc38fa79.png">
 <meta property="og:image" content="https://i.loli.net/2018/12/19/5c19f58cdfc52.png">
 <meta property="og:image" content="https://i.loli.net/2018/12/19/5c19f68ac2929.png">
-<meta property="og:updated_time" content="2018-12-19T11:57:22.830Z">
+<meta property="og:updated_time" content="2018-12-19T12:34:36.763Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="EM算法详解">
 <meta name="twitter:description" content="背景实例假从学校抽取了200名学生，现在我们的工作就是要确定这200个学生中每个学生是属于男生还是属于女生，并且求出是男生这个分布的参数，要求出是女生这个分布参数。 EM算法就是这样，假设我们想估计知道A和B两个参数，在开始状态下二者都是未知的，但如果知道了A的信息就可以得到B的信息，反过来知道了B也就得到了A。可以考虑首先赋予A某种初值，以此得到B的估计值，然后从B的当前值出发，重新估计A的取值">
-<meta name="twitter:image" content="https://images.cnblogs.com/cnblogs_com/jerrylead/201104/201104061615528987.png">
+<meta name="twitter:image" content="https://i.loli.net/2018/12/19/5c19e399c985b.png">
 
 
 
@@ -341,7 +339,7 @@
         <h1 id="背景实例"><a href="#背景实例" class="headerlink" title="背景实例"></a>背景实例</h1><p>假从学校抽取了200名学生，现在我们的工作就是要确定这200个学生中每个学生是属于男生还是属于女生，并且求出是男生这个分布的参数，要求出是女生这个分布参数。</p>
 <p>EM算法就是这样，假设我们想估计知道A和B两个参数，在开始状态下二者都是未知的，但如果知道了A的信息就可以得到B的信息，反过来知道了B也就得到了A。可以考虑首先赋予A某种初值，以此得到B的估计值，然后从B的当前值出发，重新估计A的取值，这个过程一直持续到收敛为止。这里的A可以理解为每一个样本它的分布情况，即是属于男生还是属于女生。</p>
 <p> EM的意思是“ExpectationMaximization”，在我们上面这个问题里面，我们是先随便猜一下男生（身高）的正态分布的参数：如均值和方差是多少。例如男生的均值是1米7，方差是0.1米（当然了，刚开始肯定没那么准），然后计算出每个人更可能属于第一个还是第二个正态分布中的（例如，这个人的身高是1米8，那很明显，他最大可能属于男生的那个分布），这个是属于Expectation一步。有了每个人的归属，或者说我们已经大概地按上面的方法将这200个人分为男生和女生两部分，我们就可以根据之前说的最大似然那样，通过这些被大概分为男生的n个人来重新估计第一个分布的参数，女生的那个分布同样方法重新估计。这个是Maximization。然后，当我们更新了这两个分布的时候，每一个属于这两个分布的概率又变了，那么我们就再需要调整E步……如此往复，直到参数基本不再发生变化为止。</p>
-<h1 id="Jensen不等式"><a href="#Jensen不等式" class="headerlink" title="Jensen不等式"></a>Jensen不等式</h1><p> 回顾优化理论中的一些概念。设f是定义域为实数的函数，如果对于所有的实数$x$，$f^{‘’}\ge 0$，那么f是凸函数。当x是向量时，如果其hessian矩阵H是半正定的（<a href="http://images.cnblogs.com/cnblogs_com/jerrylead/201104/201104061615523937.png" target="_blank" rel="noopener"><img src="https://images.cnblogs.com/cnblogs_com/jerrylead/201104/201104061615528987.png" alt="clip_image004"></a>），那么f是凸函数。如果$f^{‘’}\ge 0$或者<a href="http://images.cnblogs.com/cnblogs_com/jerrylead/201104/201104061615534069.png" target="_blank" rel="noopener"><img src="https://images.cnblogs.com/cnblogs_com/jerrylead/201104/20110406161553755.png" alt="clip_image008"></a>，那么称f是严格凸函数。</p>
+<h1 id="Jensen不等式"><a href="#Jensen不等式" class="headerlink" title="Jensen不等式"></a>Jensen不等式</h1><p> 回顾优化理论中的一些概念。设f是定义域为实数的函数，如果对于所有的实数$x$，$f^{‘’}\ge 0$，那么f是凸函数。当x是向量时，如果其hessian矩阵H是半正定的（H&gt;0），那么f是凸函数。如果$f^{‘’}\ge 0$或者（H&gt;0），那么称f是严格凸函数。</p>
 <pre><code>  Jensen不等式表述如下：
 
   如果f是凸函数，X是随机变量，那么
@@ -359,8 +357,8 @@
 
   Jensen不等式应用于凹函数时，不等号方向反向，也就是$E(f(x))\le f(E(x))$
 </code></pre><h1 id="为什么要有EM算法"><a href="#为什么要有EM算法" class="headerlink" title="为什么要有EM算法"></a>为什么要有EM算法</h1><p>我把EM算法当做最大似然估计的拓展，解决难以给出解析解的最大似然估计（MLE）问题。 考虑高斯分布，它的最大似然估计是这样的：</p>
-<p>$\theta ^ { * } = \arg \max _ { \theta } \sum _ { X } \log L ( \theta | X )$</p>
-<p>其中：$\theta = ( \mu , \sigma ) , \theta ^ { <em> } = \left( \mu ^ { </em> } , \sigma ^ { <em> } \right) , \log L ( \theta | X ) = \log P ( X ; \theta )$是对数似然函数，分号左边是随机变量，右边是模型参数。 $P ( X ; \theta )$表示X的概率值函数，它是一个以$\theta$为参数的函数（很多人看不懂EM算法就是因为符号问题）。这里对 求导很容易$\theta$解出 $\theta^{</em>}$。</p>
+<p>$\theta ^ {\star} = \arg \max _ { \theta } \sum _ { X } \log L ( \theta | X )$</p>
+<p>其中：$ \theta = ( \mu , \sigma ) , \theta ^ { \star } = \left( \mu ^ {\star} , \sigma ^ {\star} \right) , \log L ( \theta | X ) = \log P ( X ; \theta )$是对数似然函数，分号左边是随机变量，右边是模型参数。 $P ( X ; \theta )$表示X的概率值函数，它是一个以$\theta$为参数的函数（很多人看不懂EM算法就是因为符号问题）。这里对 求导很容易$\theta $解出 $\theta^{\star}$。</p>
 <p>如果这是个含有隐量Z的模型比如混合高斯模型，$P ( X ; \theta ) = \sum _ { k = 1 } ^ { K } \pi _ { k } N \left( x ; \mu _ { k } , \sigma _ { k } \right) = \sum _ { Z } P ( Z ; \pi ) P ( X | Z ; \mu , \sigma )$</p>
 <p>上面假设共有K个高斯模型混合.每个高斯模型的参数为 $\theta _ { k } = \left( \mu _ { k } , \sigma _ { k } \right)$ ，每个高斯模型占总模型的比重为$\pi_k$ 。隐变量$Z \in \left\{ z _ { 1 } , z _ { 2 } , \ldots , z _ { K } \right\}$表示样本$x_i$来自于哪一个高斯分布。分布列为：</p>
 <p>$P \left( Z = z _ { 1 } \right) = \pi _ { 1 }$</p>
@@ -388,8 +386,8 @@
 <p>  对应于上述问题，Y是$\left[ p \left( x ^ { ( i ) } , z ^ { ( i ) } ; \theta \right) / Q _ { i } \left( z ^ { ( i ) } \right) \right]$ ，X是$z ^ { ( i ) } , Q _ { i } \left( z ^ { ( i ) } \right)$ 是$p _ { k }$ ，g是$z^{(i)}$到$\left[ p \left( x ^ { ( i ) } , z ^ { ( i ) } ; \theta \right) / Q _ { i } \left( z ^ { ( i ) } \right) \right]$的映射。这样解释了式子（2）中的期望，再根据凹函数时的Jensen不等式：</p>
 <p>$f \left( \mathrm { E } _ { z ^ { ( i ) } \sim Q _ { i } } \left[ \frac { p \left( x ^ { ( i ) } , z ^ { ( i ) } ; \theta \right) } { Q _ { i } \left( z ^ { ( i ) } \right) } \right] \right) \geq \mathrm { E } _ { z ^ { ( i ) } \sim Q _ { i } } \left[ f \left( \frac { p \left( x ^ { ( i ) } , z ^ { ( i ) } ; \theta \right) } { Q _ { i } \left( z ^ { ( i ) } \right) } \right) \right]$</p>
 <p>可以得到（3）。</p>
-<pre><code>  这个过程可以看作是对$\ell ( \theta )$求了下界。对于$Q_i$的选择，有多种可能，那种更好的？假设$\theta$已经给定，那么$\ell ( \theta )$的值就决定于$Q _ { i } \left( z ^ { ( i ) } \right)$和$p \left( x ^ { ( i ) } , z ^ { ( i ) } \right)$了。我们可以通过调整这两个概率使下界不断上升，以逼近$\ell ( \theta )$的真实值，那么什么时候算是调整好了呢？当不等式变成等式时，说明我们调整后的概率能够等价于$\ell ( \theta )$了。按照这个思路，我们要找到等式成立的条件。根据Jensen不等式，要想让等式成立，需要让随机变量变成常数值，这里得到：
-</code></pre><p>$\frac { p \left( x ^ { ( i ) } , z ^ { ( i ) } ; \theta \right) } { Q _ { i } \left( z ^ { ( i ) } \right) } = c$</p>
+<p>这个过程可以看作是对$\ell ( \theta )$求了下界。对于$Q_i$的选择，有多种可能，那种更好的？假设$\theta$已经给定，那么$\ell ( \theta )$的值就决定于$Q _ { i } \left( z ^ { ( i ) } \right)$和$p \left( x ^ { ( i ) } , z ^ { ( i ) } \right)$了。我们可以通过调整这两个概率使下界不断上升，以逼近$\ell ( \theta )$的真实值，那么什么时候算是调整好了呢？当不等式变成等式时，说明我们调整后的概率能够等价于$\ell ( \theta )$了。按照这个思路，我们要找到等式成立的条件。根据Jensen不等式，要想让等式成立，需要让随机变量变成常数值，这里得到：</p>
+<p>$\frac { p \left( x ^ { ( i ) } , z ^ { ( i ) } ; \theta \right) } { Q _ { i } \left( z ^ { ( i ) } \right) } = c$</p>
 <p>c为常数，不依赖于$z ^ { ( i ) }$。对此式子做进一步推导，我们知道$\Sigma _ { z } Q _ { i } \left( z ^ { ( 1 ) } \right) = 1$，那么也就有$\sum _ { z } p \left( x ^ { ( \mathrm { i } ) } , z ^ { ( i ) } ; \theta \right) = c$，（多个等式分子分母相加不变，这个认为每个样例的两个概率比值都是c），那么有下式：</p>
 <p>$\begin{aligned} Q _ { i } \left( z ^ { ( i ) } \right) &amp; = \frac { p \left( x ^ { ( i ) } , z ^ { ( i ) } ; \theta \right) } { \sum _ { z } p \left( x ^ { ( i ) } , z ; \theta \right) } \\ &amp; = \frac { p \left( x ^ { ( i ) } , z ^ { ( i ) } ; \theta \right) } { p \left( x ^ { ( i ) } ; \theta \right) } \\ &amp; = p \left( z ^ { ( i ) } | x ^ { ( i ) } ; \theta \right) \end{aligned}$</p>
 <p>至此，我们推出了在固定其他参数$\theta$后，$Q _ { \mathrm { i } } \left( z ^ { ( \mathrm { i } ) } \right)$的计算公式就是<strong>后验概率</strong>，解决了$Q _ { \mathrm { i } } \left( z ^ { ( \mathrm { i } ) } \right)$如何选择的问题。这一步就是E步，建立$\ell ( \theta )$的下界。接下来的M步，就是在给定$Q _ { \mathrm { i } } \left( z ^ { ( \mathrm { i } ) } \right)$后，调整$Q _ { \mathrm { i } } \left( z ^ { ( \mathrm { i } ) } \right)$，去极大化$\ell ( \theta )$的下界（在固定后，下界还可以调整的更大）。那么一般的EM算法的步骤如下：</p>
@@ -493,8 +491,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/12/15/20181215195642/" rel="next" title="20181215195642">
-                <i class="fa fa-chevron-left"></i> 20181215195642
+              <a href="/2018/12/17/SYN-flood-攻击及-SYN-cookie-原理分析/" rel="next" title="SYN flood 攻击及 SYN cookie 原理分析">
+                <i class="fa fa-chevron-left"></i> SYN flood 攻击及 SYN cookie 原理分析
               </a>
             
           </div>
@@ -606,12 +604,21 @@ var jiathis_config={
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
             
 
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
             
 
             
@@ -619,7 +626,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">标签</span>
                 
               </div>
