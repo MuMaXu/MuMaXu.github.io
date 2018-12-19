@@ -359,70 +359,70 @@
 
   Jensen不等式应用于凹函数时，不等号方向反向，也就是$E(f(x))\le f(E(x))$
 </code></pre><h1 id="为什么要有EM算法"><a href="#为什么要有EM算法" class="headerlink" title="为什么要有EM算法"></a>为什么要有EM算法</h1><p>我把EM算法当做最大似然估计的拓展，解决难以给出解析解的最大似然估计（MLE）问题。 考虑高斯分布，它的最大似然估计是这样的：</p>
-<p>$\theta ^ { * } = \arg \max <em> { \theta } \sum </em> { X } \log L ( \theta | X )$</p>
+<p>$\theta ^ { * } = \arg \max _ { \theta } \sum _ { X } \log L ( \theta | X )$</p>
 <p>其中：$\theta = ( \mu , \sigma ) , \theta ^ { <em> } = \left( \mu ^ { </em> } , \sigma ^ { <em> } \right) , \log L ( \theta | X ) = \log P ( X ; \theta )$是对数似然函数，分号左边是随机变量，右边是模型参数。 $P ( X ; \theta )$表示X的概率值函数，它是一个以$\theta$为参数的函数（很多人看不懂EM算法就是因为符号问题）。这里对 求导很容易$\theta$解出 $\theta^{</em>}$。</p>
-<p>如果这是个含有隐量Z的模型比如混合高斯模型，$P ( X ; \theta ) = \sum <em> { k = 1 } ^ { K } \pi </em> { k } N \left( x ; \mu <em> { k } , \sigma </em> { k } \right) = \sum _ { Z } P ( Z ; \pi ) P ( X | Z ; \mu , \sigma )$</p>
-<p>上面假设共有K个高斯模型混合.每个高斯模型的参数为 $\theta <em> { k } = \left( \mu </em> { k } , \sigma <em> { k } \right)$ ，每个高斯模型占总模型的比重为$\pi_k$ 。隐变量$Z \in \left{ z </em> { 1 } , z <em> { 2 } , \ldots , z </em> { K } \right}$表示样本$x_i$来自于哪一个高斯分布。分布列为：</p>
-<p>$P \left( Z = z <em> { 1 } \right) = \pi </em> { 1 }$</p>
-<p>$P \left( Z = z <em> { 2 } \right) = \pi </em> { 2 }$</p>
+<p>如果这是个含有隐量Z的模型比如混合高斯模型，$P ( X ; \theta ) = \sum _ { k = 1 } ^ { K } \pi _ { k } N \left( x ; \mu _ { k } , \sigma _ { k } \right) = \sum _ { Z } P ( Z ; \pi ) P ( X | Z ; \mu , \sigma )$</p>
+<p>上面假设共有K个高斯模型混合.每个高斯模型的参数为 $\theta _ { k } = \left( \mu _ { k } , \sigma _ { k } \right)$ ，每个高斯模型占总模型的比重为$\pi_k$ 。隐变量$Z \in \left\{ z _ { 1 } , z _ { 2 } , \ldots , z _ { K } \right\}$表示样本$x_i$来自于哪一个高斯分布。分布列为：</p>
+<p>$P \left( Z = z _ { 1 } \right) = \pi _ { 1 }$</p>
+<p>$P \left( Z = z _ { 2 } \right) = \pi _ { 2 }$</p>
 <p>$…$</p>
-<p>$P \left( Z = z <em> { K } \right) = \pi </em> { K }$</p>
-<p>可以认为，混合高斯分布的观测值是这样产生的：先以概率$\pi<em>K$抽取一个高斯分布$z_k$ ，再以该高斯分布 $N \left( x ; \mu </em> { k } , \sigma <em> { k } \right)$，去生成观测x。其实这里的$\pi_k$就Z的先验分布$P ( Z ; \pi )$ (这里特地加上；$\pi$ 表示P(Z)的参数是你需要求出才能表示这个先验分布),而$N \left( x ; \mu </em> { k } , \sigma _ { k } \right)$就是给定Z下的条件概率$P ( X | Z ; \mu , \sigma )$， 这时，令$\theta = ( \mu , \sigma , \pi ) , \theta ^ { <em> } = \left( \mu ^ { </em> } , \sigma ^ { <em> } , \pi ^ { </em> } \right)$最大似然估计变成了</p>
-<p>$\theta ^ { * } = \arg \max <em> { \theta } \sum </em> { X } \log P ( X ; \theta )$  </p>
-<p>​    $ \begin{array} { l } { = \arg \max <em> { \theta } \sum </em> { X } ^ { K } \log \sum <em> { Z } P ( Z ; \pi ) P ( X | Z ; \mu , \sigma ) } \ { = \arg \max </em> { \theta } \sum <em> { X } \log \sum </em> { Z } P ( X , Z ; \theta ) } \end{array}$</p>
+<p>$P \left( Z = z _ { K } \right) = \pi _ { K }$</p>
+<p>可以认为，混合高斯分布的观测值是这样产生的：先以概率$\pi_K$抽取一个高斯分布$z_k$ ，再以该高斯分布 $N \left( x ; \mu _ { k } , \sigma _ { k } \right)$，去生成观测x。其实这里的$\pi_k$就Z的先验分布$P ( Z ; \pi )$ (这里特地加上；$\pi$ 表示P(Z)的参数是你需要求出才能表示这个先验分布),而$N \left( x ; \mu _ { k } , \sigma _ { k } \right)$就是给定Z下的条件概率$P ( X | Z ; \mu , \sigma )$， 这时，令$\theta = ( \mu , \sigma , \pi ) , \theta ^ { <em> } = \left( \mu ^ { </em> } , \sigma ^ { <em> } , \pi ^ { </em> } \right)$最大似然估计变成了</p>
+<p>$\theta ^ { * } = \arg \max _ { \theta } \sum _ { X } \log P ( X ; \theta )$  </p>
+<p>​    $ \begin{array} { l } { = \arg \max _ { \theta } \sum _ { X } ^ { K } \log \sum _ { Z } P ( Z ; \pi ) P ( X | Z ; \mu , \sigma ) } \\ { = \arg \max _ { \theta } \sum _ { X } \log \sum _ { Z } P ( X , Z ; \theta ) } \end{array}$</p>
 <h1 id="EM算法"><a href="#EM算法" class="headerlink" title="EM算法"></a>EM算法</h1><p>给定的训练样本是${x^{(1)},x^{(2)},…,x^{(m)}}$，样例间独立但每个样本i对应的类别z(i)是未知的（相当于聚类），也即隐含变量。故我们需要估计概率模型p(x,z)的参数θ，但是由于里面包含隐含变量z，所以很难用最大似然求解，但如果z知道了，那我们就很容易求解了。 对于参数估计，我们本质上还是想获得一个使似然函数最大化的那个参数θ，现在与最大似然不同的只是似然函数式中多了一个未知的变量z，也就是说我们的目标是找到适合的θ和z让L(θ)最大。那我们也许会想，你就是多了一个未知的变量而已啊，我也可以分别对未知的θ和z分别求偏导，再令其等于0，求解出来不也一样吗？</p>
-<p>$\begin{aligned} \ell ( \theta ) &amp; = \sum <em> { i = 1 } ^ { m } \log p ( x ; \theta ) \ &amp; = \sum </em> { i = 1 } ^ { m } \log \sum _ { z } p ( x , z ; \theta ) \end{aligned}$</p>
+<p>$\begin{aligned} \ell ( \theta ) &amp; = \sum _ { i = 1 } ^ { m } \log p ( x ; \theta ) \\ &amp; = \sum _ { i = 1 } ^ { m } \log \sum _ { z } p ( x , z ; \theta ) \end{aligned}$</p>
 <p>第一步是对极大似然取对数，第二步是对每个样例的每个可能类别z求联合分布概率和。但是直接求$\theta$一般比较困难，因为有隐藏变量z存在，但是一般确定了z后，求解就容易了。</p>
 <p>EM是一种解决存在隐含变量优化问题的有效方法。竟然不能直接最大化，我们可以不断地建立的<strong>下界（E步）</strong>，然后<strong>优化下界（M步）</strong>。这句话比较抽象，看下面的。</p>
 <p> <strong>对于每一个样例i</strong>，让$Q_i$表示该样例隐含变量z的某种分布，$Q_i$满足的条件是$\sum_zQ_i(z)=1,Q_i(z)\ge0$。（如果z是连续性的，那么$Q_i$是概率密度函数，需要将求和符号换做积分符号）。比如要将班上学生聚类，假设隐藏变量z是身高，那么就是连续的高斯分布。如果按照隐藏变量是男女，那么就是伯努利分布了。</p>
 <p>可以由前面阐述的内容得到下面的公式：</p>
-<p>$\begin{aligned} \sum <em> { i } \log p \left( x ^ { ( i ) } ; \theta \right) &amp; = \sum </em> { i } \log \sum <em>{ z ^ { ( i ) } } p \left( x ^ { ( i ) } , z ^ { ( i ) }  ; \theta \right)             (1)\ &amp; = \sum </em> { i } \log \sum <em> { z ^ { ( i ) } } Q </em> { i } \left( z ^ { ( i ) } \right) \frac { p \left( x ^ { ( i ) } , z ^ { ( i ) } ; \theta \right) } { Q <em> { i } \left( z ^ { ( i ) } \right) }                 (2) \ &amp; \geq \sum </em> { i } \sum <em> { z ^ { ( i ) } } Q </em> { i } \left( z ^ { ( i ) } \right) \log \frac { p \left( x ^ { ( i ) } , z ^ { ( i ) }              ; \theta \right) } { Q _ { i } \left( z ^ { ( i ) } \right) }              (3)\end{aligned}$</p>
+<p>$\begin{aligned} \sum _ { i } \log p \left( x ^ { ( i ) } ; \theta \right) &amp; = \sum _ { i } \log \sum _{ z ^ { ( i ) } } p \left( x ^ { ( i ) } , z ^ { ( i ) }  ; \theta \right)             (1)\\ &amp; = \sum _ { i } \log \sum _ { z ^ { ( i ) } } Q _ { i } \left( z ^ { ( i ) } \right) \frac { p \left( x ^ { ( i ) } , z ^ { ( i ) } ; \theta \right) } { Q _ { i } \left( z ^ { ( i ) } \right) }                 (2) \\ &amp; \geq \sum _ { i } \sum _ { z ^ { ( i ) } } Q _ { i } \left( z ^ { ( i ) } \right) \log \frac { p \left( x ^ { ( i ) } , z ^ { ( i ) }              ; \theta \right) } { Q _ { i } \left( z ^ { ( i ) } \right) }              (3)\end{aligned}$</p>
 <p>本质上我们是需要最大化（1）式（对（1）式，我们回忆下联合概率密度下某个变量的边缘概率密度函数的求解，注意这里z也是随机变量。对每一个样本i的所有可能类别z求等式右边的联合概率密度函数和，也就得到等式左边为随机变量x的边缘概率密度），也就是似然函数，但是可以看到里面有“和的对数”，求导后形式会非常复杂（自己可以想象下$log(f1(x)+ f2(x)+ f3(x)+…)$复合函数的求导），所以很难求解得到未知参数z和θ。那OK，我们可否对（1）式做一些改变呢？我们看（2）式，（2）式只是分子分母同乘以一个相等的函数，还是有“和的对数”啊，还是求解不了，那为什么要这么做呢？咱们先不管，看（3）式，发现（3）式变成了“对数的和”，那这样求导就容易了。我们注意点，还发现等号变成了不等号，为什么能这么变呢？（2）到（3）利用了Jensen不等式，考虑到$log(x)$是凹函数（二阶导数小于0），而且</p>
-<p>$\sum <em> { z ^ { ( i ) } } Q </em> { i } \left( z ^ { ( i ) } \right) \left[ \frac { p \left( x ^ { ( i ) } , z ^ { ( i ) } ; \theta \right) } { Q _ { i } \left( z ^ { ( i ) } \right) } \right]$</p>
+<p>$\sum _ { z ^ { ( i ) } } Q _ { i } \left( z ^ { ( i ) } \right) \left[ \frac { p \left( x ^ { ( i ) } , z ^ { ( i ) } ; \theta \right) } { Q _ { i } \left( z ^ { ( i ) } \right) } \right]$</p>
 <p>  就是$\left[ p \left( x ^ { ( i ) } , z ^ { ( i ) } ; \theta \right) / Q _ { i } \left( z ^ { ( i ) } \right) \right]$的期望（回想期望公式中的Lazy Statistician规则）</p>
 <p>设Y是随机变量X的函数Y=g(X)（g是连续函数），那么</p>
-<p>（1） X是离散型随机变量，它的分布律为$\mathrm { P } \left( \mathrm { X } = x <em> { k } \right) = p </em> { k } , \mathrm { k } = 1,2 , \dots$，k=1,2,…。若$\sum <em> { k = 1 } ^ { \infty } \mathrm { g } \left( x </em> { k } \right) p _ { k }$绝对收敛，则有</p>
-<p>$\mathrm { E } ( \mathrm { Y } ) = \mathrm { E } [ \mathrm { g } ( \mathrm { X } ) ] = \sum <em> { k = 1 } ^ { \infty } \mathrm { g } \left( x </em> { k } \right) p _ { k }$</p>
+<p>（1） X是离散型随机变量，它的分布律为$\mathrm { P } \left( \mathrm { X } = x _ { k } \right) = p _ { k } , \mathrm { k } = 1,2 , \dots$，k=1,2,…。若$\sum _ { k = 1 } ^ { \infty } \mathrm { g } \left( x _ { k } \right) p _ { k }$绝对收敛，则有</p>
+<p>$\mathrm { E } ( \mathrm { Y } ) = \mathrm { E } [ \mathrm { g } ( \mathrm { X } ) ] = \sum _ { k = 1 } ^ { \infty } \mathrm { g } \left( x _ { k } \right) p _ { k }$</p>
 <p>（2） X是连续型随机变量，它的概率密度为f(x)，若$\int _ { - \infty } ^ { \infty } g ( x ) f ( x ) d x$ 收敛，则有</p>
 <p>$\mathrm { E } ( \mathrm { Y } ) = \mathrm { E } [ \mathrm { g } ( \mathrm { X } ) ] = \int _ { - \infty } ^ { \infty } \mathrm { g } ( \mathrm { x } ) \mathrm { f } ( \mathrm { x } ) \mathrm { d } \mathrm { x }$</p>
-<p>  对应于上述问题，Y是$\left[ p \left( x ^ { ( i ) } , z ^ { ( i ) } ; \theta \right) / Q <em> { i } \left( z ^ { ( i ) } \right) \right]$ ，X是$z ^ { ( i ) } , Q </em> { i } \left( z ^ { ( i ) } \right)$ 是$p <em> { k }$ ，g是$z^{(i)}$到$\left[ p \left( x ^ { ( i ) } , z ^ { ( i ) } ; \theta \right) / Q </em> { i } \left( z ^ { ( i ) } \right) \right]$的映射。这样解释了式子（2）中的期望，再根据凹函数时的Jensen不等式：</p>
-<p>$f \left( \mathrm { E } <em> { z ^ { ( i ) } \sim Q </em> { i } } \left[ \frac { p \left( x ^ { ( i ) } , z ^ { ( i ) } ; \theta \right) } { Q <em> { i } \left( z ^ { ( i ) } \right) } \right] \right) \geq \mathrm { E } </em> { z ^ { ( i ) } \sim Q <em> { i } } \left[ f \left( \frac { p \left( x ^ { ( i ) } , z ^ { ( i ) } ; \theta \right) } { Q </em> { i } \left( z ^ { ( i ) } \right) } \right) \right]$</p>
+<p>  对应于上述问题，Y是$\left[ p \left( x ^ { ( i ) } , z ^ { ( i ) } ; \theta \right) / Q _ { i } \left( z ^ { ( i ) } \right) \right]$ ，X是$z ^ { ( i ) } , Q _ { i } \left( z ^ { ( i ) } \right)$ 是$p _ { k }$ ，g是$z^{(i)}$到$\left[ p \left( x ^ { ( i ) } , z ^ { ( i ) } ; \theta \right) / Q _ { i } \left( z ^ { ( i ) } \right) \right]$的映射。这样解释了式子（2）中的期望，再根据凹函数时的Jensen不等式：</p>
+<p>$f \left( \mathrm { E } _ { z ^ { ( i ) } \sim Q _ { i } } \left[ \frac { p \left( x ^ { ( i ) } , z ^ { ( i ) } ; \theta \right) } { Q _ { i } \left( z ^ { ( i ) } \right) } \right] \right) \geq \mathrm { E } _ { z ^ { ( i ) } \sim Q _ { i } } \left[ f \left( \frac { p \left( x ^ { ( i ) } , z ^ { ( i ) } ; \theta \right) } { Q _ { i } \left( z ^ { ( i ) } \right) } \right) \right]$</p>
 <p>可以得到（3）。</p>
 <pre><code>  这个过程可以看作是对$\ell ( \theta )$求了下界。对于$Q_i$的选择，有多种可能，那种更好的？假设$\theta$已经给定，那么$\ell ( \theta )$的值就决定于$Q _ { i } \left( z ^ { ( i ) } \right)$和$p \left( x ^ { ( i ) } , z ^ { ( i ) } \right)$了。我们可以通过调整这两个概率使下界不断上升，以逼近$\ell ( \theta )$的真实值，那么什么时候算是调整好了呢？当不等式变成等式时，说明我们调整后的概率能够等价于$\ell ( \theta )$了。按照这个思路，我们要找到等式成立的条件。根据Jensen不等式，要想让等式成立，需要让随机变量变成常数值，这里得到：
 </code></pre><p>$\frac { p \left( x ^ { ( i ) } , z ^ { ( i ) } ; \theta \right) } { Q _ { i } \left( z ^ { ( i ) } \right) } = c$</p>
-<p>c为常数，不依赖于$z ^ { ( i ) }$。对此式子做进一步推导，我们知道$\Sigma <em> { z } Q </em> { i } \left( z ^ { ( 1 ) } \right) = 1$，那么也就有$\sum _ { z } p \left( x ^ { ( \mathrm { i } ) } , z ^ { ( i ) } ; \theta \right) = c$，（多个等式分子分母相加不变，这个认为每个样例的两个概率比值都是c），那么有下式：</p>
-<p>$\begin{aligned} Q <em> { i } \left( z ^ { ( i ) } \right) &amp; = \frac { p \left( x ^ { ( i ) } , z ^ { ( i ) } ; \theta \right) } { \sum </em> { z } p \left( x ^ { ( i ) } , z ; \theta \right) } \ &amp; = \frac { p \left( x ^ { ( i ) } , z ^ { ( i ) } ; \theta \right) } { p \left( x ^ { ( i ) } ; \theta \right) } \ &amp; = p \left( z ^ { ( i ) } | x ^ { ( i ) } ; \theta \right) \end{aligned}$</p>
-<p>至此，我们推出了在固定其他参数$\theta$后，$Q <em> { \mathrm { i } } \left( z ^ { ( \mathrm { i } ) } \right)$的计算公式就是<strong>后验概率</strong>，解决了$Q </em> { \mathrm { i } } \left( z ^ { ( \mathrm { i } ) } \right)$如何选择的问题。这一步就是E步，建立$\ell ( \theta )$的下界。接下来的M步，就是在给定$Q <em> { \mathrm { i } } \left( z ^ { ( \mathrm { i } ) } \right)$后，调整$Q </em> { \mathrm { i } } \left( z ^ { ( \mathrm { i } ) } \right)$，去极大化$\ell ( \theta )$的下界（在固定后，下界还可以调整的更大）。那么一般的EM算法的步骤如下：</p>
+<p>c为常数，不依赖于$z ^ { ( i ) }$。对此式子做进一步推导，我们知道$\Sigma _ { z } Q _ { i } \left( z ^ { ( 1 ) } \right) = 1$，那么也就有$\sum _ { z } p \left( x ^ { ( \mathrm { i } ) } , z ^ { ( i ) } ; \theta \right) = c$，（多个等式分子分母相加不变，这个认为每个样例的两个概率比值都是c），那么有下式：</p>
+<p>$\begin{aligned} Q _ { i } \left( z ^ { ( i ) } \right) &amp; = \frac { p \left( x ^ { ( i ) } , z ^ { ( i ) } ; \theta \right) } { \sum _ { z } p \left( x ^ { ( i ) } , z ; \theta \right) } \\ &amp; = \frac { p \left( x ^ { ( i ) } , z ^ { ( i ) } ; \theta \right) } { p \left( x ^ { ( i ) } ; \theta \right) } \\ &amp; = p \left( z ^ { ( i ) } | x ^ { ( i ) } ; \theta \right) \end{aligned}$</p>
+<p>至此，我们推出了在固定其他参数$\theta$后，$Q _ { \mathrm { i } } \left( z ^ { ( \mathrm { i } ) } \right)$的计算公式就是<strong>后验概率</strong>，解决了$Q _ { \mathrm { i } } \left( z ^ { ( \mathrm { i } ) } \right)$如何选择的问题。这一步就是E步，建立$\ell ( \theta )$的下界。接下来的M步，就是在给定$Q _ { \mathrm { i } } \left( z ^ { ( \mathrm { i } ) } \right)$后，调整$Q _ { \mathrm { i } } \left( z ^ { ( \mathrm { i } ) } \right)$，去极大化$\ell ( \theta )$的下界（在固定后，下界还可以调整的更大）。那么一般的EM算法的步骤如下：</p>
 <p>​                      给定一个初始分布参数</p>
 <p>​                      循环重复直到收敛 {</p>
 <pre><code>                                   （E步）对于每一个i，计算
 </code></pre><p>​                                                           $Q _ { i } \left( z ^ { ( 1 ) } \right) : = p \left( z ^ { ( i ) } | x ^ { ( i ) } ; \theta \right)$</p>
 <p>​                                        （M步）计算</p>
-<p>​                                                           $\theta : = \arg \max <em> { \theta } \sum </em> { i } \sum <em> { z ^ { ( i ) } } Q </em> { i } \left( z ^ { ( i ) } \right) \log \frac { p \left( x ^ { ( i ) } , z ^ { ( i ) } ; \theta \right) } { Q _ { i } \left( z ^ { ( i ) } \right) }$</p>
+<p>​                                                           $\theta : = \arg \max _ { \theta } \sum _ { i } \sum _ { z ^ { ( i ) } } Q _ { i } \left( z ^ { ( i ) } \right) \log \frac { p \left( x ^ { ( i ) } , z ^ { ( i ) } ; \theta \right) } { Q _ { i } \left( z ^ { ( i ) } \right) }$</p>
 <h1 id="从EM算法的视角审视混合高斯模型"><a href="#从EM算法的视角审视混合高斯模型" class="headerlink" title="从EM算法的视角审视混合高斯模型"></a>从EM算法的视角审视混合高斯模型</h1><h2 id="什么是高斯混合模型"><a href="#什么是高斯混合模型" class="headerlink" title="什么是高斯混合模型"></a>什么是高斯混合模型</h2><p>高斯混合模型（Gaussian Mixed Model）指的是多个高斯分布函数的线性组合，理论上GMM可以拟合出任意类型的分布，通常用于解决同一集合下的数据包含多个不同的分布的情况（或者是同一类分布但参数不一样，或者是不同类型的分布，比如正态分布和伯努利分布）。</p>
 <h2 id="高斯混合模型的数学表达式"><a href="#高斯混合模型的数学表达式" class="headerlink" title="高斯混合模型的数学表达式"></a>高斯混合模型的数学表达式</h2><p>设有随机变量Х，则混合高斯模型可以用下式表示：</p>
-<p>$\mathrm { p } ( \mathrm { x } ) = \sum <em> { k = 1 } ^ { K } \pi </em> { k } N ( x | \mu <em> { k } , \Sigma </em> { k } )$        </p>
-<p>其中$\mathrm { N } ( \mathrm { x } | \mu <em> { \mathrm { k } } , \Sigma </em> { \mathrm { k } } )$称为混合模型中的第k个分量（component）。</p>
+<p>$\mathrm { p } ( \mathrm { x } ) = \sum _ { k = 1 } ^ { K } \pi _ { k } N ( x | \mu _ { k } , \Sigma _ { k } )$        </p>
+<p>其中$\mathrm { N } ( \mathrm { x } | \mu _ { \mathrm { k } } , \Sigma _ { \mathrm { k } } )$称为混合模型中的第k个分量（component）。</p>
 <p><img src="https://i.loli.net/2018/12/19/5c1a0001a23e6.png" alt=""></p>
 <p>如前面图中的例子，有两个聚类，可以用两个二维高斯分布来表示，那么分量数K=2，是混合系数（mixture coefficient），且满足</p>
-<p>$\sum <em> { \mathrm { k } = 1 } ^ { \mathrm { K } } \pi </em> { \mathrm { k } } = 1$       $0 \leq \pi _ { k } \leq 1$</p>
+<p>$\sum _ { \mathrm { k } = 1 } ^ { \mathrm { K } } \pi _ { \mathrm { k } } = 1$       $0 \leq \pi _ { k } \leq 1$</p>
 <p>可以看到$\pi _ { \mathrm { k } }$相当于每个分量的权重。</p>
 <p>例如，下图将两个高斯混合分布进行线性组合，</p>
 <p><img src="https://i.loli.net/2018/12/19/5c19ffc38fa79.png" alt=""></p>
 <h2 id="从EM算法看混合模型"><a href="#从EM算法看混合模型" class="headerlink" title="从EM算法看混合模型"></a>从EM算法看混合模型</h2><p>我们已经知道了EM的精髓和推导过程，再次审视一下混合高斯模型。之前提到的混合高斯模型的参数$\phi$ ，$\mu$ ，$\Sigma$计算公式都是根据很多假定得出的，有些没有说明来由。为了简单，这里在M步只给出$\phi$ ，$\mu$ 的推导方法。</p>
 <p>E步很简单，按照一般EM公式得到： </p>
-<p>$w <em> { j } ^ { ( i ) } = Q </em> { i } \left( z ^ { ( i ) } = j \right) = P \left( z ^ { ( i ) } = j | x ^ { ( i ) } ; \phi , \mu , \Sigma \right)$</p>
+<p>$w _ { j } ^ { ( i ) } = Q _ { i } \left( z ^ { ( i ) } = j \right) = P \left( z ^ { ( i ) } = j | x ^ { ( i ) } ; \phi , \mu , \Sigma \right)$</p>
 <p>简单解释就是每个样例i的隐含类别$z^{(i)}$为j的概率可以通过后验概率计算得到。</p>
 <pre><code>  在M步中，我们需要在固定$Q _ { i } \left( z ^ { ( i ) } \right)$后最大化最大似然估计，也就是
 </code></pre><p><img src="https://i.loli.net/2018/12/19/5c19f58cdfc52.png" alt=""></p>
-<p>这是将$z^{(i)}$的k种情况展开后的样子，未知参数$\emptyset <em> { j } $, $\mu </em> { j }$ 和$\Sigma _ { j }$。</p>
+<p>这是将$z^{(i)}$的k种情况展开后的样子，未知参数$\emptyset _ { j } $, $\mu _ { j }$ 和$\Sigma _ { j }$。</p>
 <pre><code>  固定$\emptyset _ { j }$ 和$\Sigma _ { j }$，对$\mu _ { j }$求导得:
 </code></pre><p><img src="https://i.loli.net/2018/12/19/5c19f68ac2929.png" alt=""></p>
 <p>等于0时，得到</p>
-<p>$\mu <em> { l } : = \frac { \sum </em> { i = 1 } ^ { m } w <em> { l } ^ { ( i ) } x ^ { ( i ) } } { \sum </em> { i = 1 } ^ { m } w _ { l } ^ { ( i ) } }$</p>
+<p>$\mu _ { l } : = \frac { \sum _ { i = 1 } ^ { m } w _ { l } ^ { ( i ) } x ^ { ( i ) } } { \sum _ { i = 1 } ^ { m } w _ { l } ^ { ( i ) } }$</p>
 <p>这就是我们之前模型中$\mu$的更新公式。</p>
 <pre><code>  然后推导$Q _ { j }$的更新公式(省略了步骤):
-</code></pre><p>$\phi <em> { j } : = \frac { 1 } { m } \sum </em> { i = 1 } ^ { m } w _ { j } ^ { ( i ) }$</p>
+</code></pre><p>$\phi _ { j } : = \frac { 1 } { m } \sum _ { i = 1 } ^ { m } w _ { j } ^ { ( i ) }$</p>
 <h1 id="一个栗子"><a href="#一个栗子" class="headerlink" title="一个栗子"></a>一个栗子</h1><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>公司有很多领导=[A总，刘总，C总]，同时有很多漂亮的女职员=[小甲，小章，小乙]。（请勿对号入座）你迫切的怀疑这些老总跟这些女职员有问题。为了科学的验证你的猜想，你进行了细致的观察。于是，</p>
 <h2 id="观察数据"><a href="#观察数据" class="headerlink" title="观察数据"></a>观察数据</h2><p>1）A总，小甲，小乙一起出门了；<br>2）刘总，小甲，小章一起出门了；<br>3）刘总，小章，小乙一起出门了；<br>4）C总，小乙一起出门了；</p>
 <h2 id="神秘的EM计算"><a href="#神秘的EM计算" class="headerlink" title="神秘的EM计算"></a>神秘的EM计算</h2><p>初始化，你觉得三个老总一样帅，一样有钱，三个美女一样漂亮，每个人都可能跟每个人有关系。所以，每个老总跟每个女职员“有问题”的概率都是1/3;</p>
