@@ -92,7 +92,7 @@
 <meta property="og:image" content="https://i.loli.net/2018/12/19/5c19ffc38fa79.png">
 <meta property="og:image" content="https://i.loli.net/2018/12/19/5c19f58cdfc52.png">
 <meta property="og:image" content="https://i.loli.net/2018/12/19/5c19f68ac2929.png">
-<meta property="og:updated_time" content="2018-12-19T12:43:04.291Z">
+<meta property="og:updated_time" content="2018-12-31T14:38:03.971Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="EM算法详解">
 <meta name="twitter:description" content="背景实例假从学校抽取了200名学生，现在我们的工作就是要确定这200个学生中每个学生是属于男生还是属于女生，并且求出是男生这个分布的参数，要求出是女生这个分布参数。 EM算法就是这样，假设我们想估计知道A和B两个参数，在开始状态下二者都是未知的，但如果知道了A的信息就可以得到B的信息，反过来知道了B也就得到了A。可以考虑首先赋予A某种初值，以此得到B的估计值，然后从B的当前值出发，重新估计A的取值">
@@ -359,7 +359,7 @@
 <p>$P \left( Z = z _ { 2 } \right) = \pi _ { 2 }$</p>
 <p>$…$</p>
 <p>$P \left( Z = z _ { K } \right) = \pi _ { K }$</p>
-<p>可以认为，混合高斯分布的观测值是这样产生的：先以概率$\pi_K$抽取一个高斯分布$z_k$ ，再以该高斯分布$N \left( x ; \mu _ { k } , \sigma _ { k } \right)$，去生成观测x。其实这里的$\pi_k$就Z的先验分布$P ( Z ; \pi )$ (这里特地加上；$\pi$ 表示P(Z)的参数是你需要求出才能表示这个先验分布),而$N \left( x ; \mu _ { k } , \sigma _ { k } \right)$就是给定Z下的条件概率$P ( X | Z ; \mu , \sigma )$， 这时，令$\theta = ( \mu , \sigma , \pi ) , \theta ^ { <em> } = \left( \mu ^ { </em> } , \sigma ^ { <em> } , \pi ^ { </em> } \right)$最大似然估计变成了</p>
+<p>可以认为，混合高斯分布的观测值是这样产生的：先以概率$\pi_K$抽取一个高斯分布$z_k$ ，再以该高斯分布$N \left( x ; \mu _ { k } , \sigma _ { k } \right)$，去生成观测x。其实这里的$\pi_k$就Z的先验分布$P ( Z ; \pi )$ (这里特地加上；$\pi$ 表示P(Z)的参数是你需要求出才能表示这个先验分布),而$N \left( x ; \mu _ { k } , \sigma _ { k } \right)$就是给定Z下的条件概率$P ( X | Z ; \mu , \sigma )$， 这时，令$\theta = ( \mu , \sigma , \pi ) , \theta ^ <em> = \left( \mu ^ { </em> } , \sigma ^ <em> , \pi ^ </em> \right)$最大似然估计变成了</p>
 <p>$\theta ^ { * } = \arg \max _ { \theta } \sum _ { X } \log P ( X ; \theta )$  </p>
 <p>​    $ \begin{array} { l } { = \arg \max _ { \theta } \sum _ { X } ^ { K } \log \sum _ { Z } P ( Z ; \pi ) P ( X | Z ; \mu , \sigma ) } \\ { = \arg \max _ { \theta } \sum _ { X } \log \sum _ { Z } P ( X , Z ; \theta ) } \end{array}$</p>
 <h1 id="EM算法"><a href="#EM算法" class="headerlink" title="EM算法"></a>EM算法</h1><p>给定的训练样本是${x^{(1)},x^{(2)},…,x^{(m)}}$，样例间独立但每个样本i对应的类别z(i)是未知的（相当于聚类），也即隐含变量。故我们需要估计概率模型p(x,z)的参数θ，但是由于里面包含隐含变量z，所以很难用最大似然求解，但如果z知道了，那我们就很容易求解了。 对于参数估计，我们本质上还是想获得一个使似然函数最大化的那个参数θ，现在与最大似然不同的只是似然函数式中多了一个未知的变量z，也就是说我们的目标是找到适合的θ和z让L(θ)最大。那我们也许会想，你就是多了一个未知的变量而已啊，我也可以分别对未知的θ和z分别求偏导，再令其等于0，求解出来不也一样吗？</p>

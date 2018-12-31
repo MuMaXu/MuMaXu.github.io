@@ -98,7 +98,7 @@
 <meta property="og:image" content="https://i.loli.net/2018/12/24/5c2089cff0681.png">
 <meta property="og:image" content="https://i.loli.net/2018/12/24/5c208e21d07ea.png">
 <meta property="og:image" content="https://i.loli.net/2018/12/24/5c20939e971a4.png">
-<meta property="og:updated_time" content="2018-12-24T11:12:39.559Z">
+<meta property="og:updated_time" content="2018-12-31T14:38:07.490Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="吴恩达序列模型————循环序列模型">
 <meta name="twitter:description" content="数学符号（输出y也是类似）$x ^ { ( i ) }$:表示第i个样本 $x ^ { ( i ) &amp;lt; t &amp;gt; }$：第i个样本第t个输入 $T _ { x } ^ { ( i ) }$:表示第i个样本的序列长度 循环神经网络为什么不用标准的神经网络 输入和输出数据在不同的例子中可以有不同的长度； 这种朴素的神经网络结果并不能共享从文本不同位置所学习到的特征。（如卷积神经网络中学到的特">
@@ -354,8 +354,8 @@
 <p>$a^{<0>}$表示的是0向量，每个时间步的输出既取决于该时间步的输入，还取决于上一个时间步中隐藏层的输出，这样可以充分利用前面所有步的信息，但缺点就是不能够利用后面步数的信息</0></p>
 <h2 id="公式表达"><a href="#公式表达" class="headerlink" title="公式表达"></a>公式表达</h2><p>$a ^ { &lt; t &gt; } = g _ { 1 } \left( w _ { a x } <em> x ^ { &lt; t &gt; } + w _ { a a } </em> a ^ { &lt; t - 1 &gt; } + b _ { a } \right)$<br>$y ^ { &lt; t &gt; } = g _ { 2 } \left( w _ { y a } * a ^ { &lt; t &gt; } + b _ { y } \right)$</p>
 <p>通常第一个g函数是$tanh(x)$函数，第二个g函数为$Sigmoid(x)$函数</p>
-<h1 id="反向传播"><a href="#反向传播" class="headerlink" title="反向传播"></a>反向传播</h1><pre><code>   定义好损失函数，通过交叉熵损失函数定义。计算过程是通过计算图，一步步通过反向传递的思想找出损失函数关于参数的偏导
-</code></pre><h1 id="不同类型的循环神经网络"><a href="#不同类型的循环神经网络" class="headerlink" title="不同类型的循环神经网络"></a>不同类型的循环神经网络</h1><p>1、many to many:命名实体标记（输入序列和输出序列的长度相等）</p>
+<h1 id="反向传播"><a href="#反向传播" class="headerlink" title="反向传播"></a>反向传播</h1><p>定义好损失函数，通过交叉熵损失函数定义。计算过程是通过计算图，一步步通过反向传递的思想找出损失函数关于参数的偏导</p>
+<h1 id="不同类型的循环神经网络"><a href="#不同类型的循环神经网络" class="headerlink" title="不同类型的循环神经网络"></a>不同类型的循环神经网络</h1><p>1、many to many:命名实体标记（输入序列和输出序列的长度相等）</p>
 <p>2、one to many:音乐序列的生成</p>
 <p>3、many to many:机器翻译（将法语翻译成英语），这种的是用encode进行输入，用decode进行输出，后面会利用attention机制来进行</p>
 <p>4、one to one:</p>
@@ -398,7 +398,7 @@
 <p>遗忘门控制上一时间步的记忆细胞$C ^ { <t 1="" -=""> }$中的信息是否传递到当前时间步，而输入门则可以控制当前时间步的输入$X ^ { <t> }$通过候选记忆细胞$\tilde { C } ^ { <t> }$如何流入当前时间步的记忆细胞。如果遗忘门直近似 1 且输入门一直近似 0，过去的记忆细胞将一直通过时间保存并传递至当前时间步。这个设计可以应对循环神经网络中的梯度衰减问题，并更好地捕捉时间序列中时间步距离较大的依赖关系。</t></t></t></p>
 <p><img src="https://i.loli.net/2018/12/24/5c2088fbdb396.png" alt=""></p>
 <h2 id="隐藏状态-1"><a href="#隐藏状态-1" class="headerlink" title="隐藏状态"></a>隐藏状态</h2><p>有了记忆细胞以后，接下来我们还可以通过输出⻔来控制从记忆细胞到隐藏状态$H ^ { <t> } \in \mathbb { R } ^ { n \times h }$的信息的流动：</t></p>
-<p>$H ^ { <t> } = O ^ { <t> } \odot \tanh \left( C ^ { <t> } \right)$</t></t></t></p>
+<p>$ H ^ { <t> } = O ^ { <t> } \odot \tanh \left( C ^ { <t> } \right) $</t></t></t></p>
 <p>这里的tanh 函数确保隐藏状态元素值在-1 到1 之间。需要注意的是，当输出门近似1 时，记忆细胞信息将传递到隐藏状态供输出层使用；当输出门近似0 时，记忆细胞信息只自己保留。图展示了长短期记忆中隐藏状态的计算。</p>
 <p><img src="https://i.loli.net/2018/12/24/5c2089cff0681.png" alt=""></p>
 <h2 id="理解"><a href="#理解" class="headerlink" title="理解"></a>理解</h2><p>遗忘门的作用是让循环神经网络“忘记”之前没有用的信息。比如一段文章先介绍了某地原来是绿水蓝天，但后来被污染了。于是在看到被污染了之后，循环神经网络应该“忘记”之前绿水蓝天的状态。这个工作是通过遗忘门来完成的。</p>
