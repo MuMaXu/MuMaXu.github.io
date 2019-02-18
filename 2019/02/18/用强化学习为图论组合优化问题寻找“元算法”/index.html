@@ -94,7 +94,7 @@
 <meta property="og:image" content="https://i.loli.net/2019/02/18/5c6a7b5a87c12.png">
 <meta property="og:image" content="https://i.loli.net/2019/02/18/5c6a7ba73b2cb.png">
 <meta property="og:image" content="https://i.loli.net/2019/02/18/5c6a7bbe0580f.png">
-<meta property="og:updated_time" content="2019-02-18T09:33:13.794Z">
+<meta property="og:updated_time" content="2019-02-18T11:10:05.092Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="用强化学习为图论组合优化问题寻找“元算法”">
 <meta name="twitter:description" content="介绍从交通优化、信息传播优化、用户网络分析，组合优化这一传统计算问题在日常应用中无处不在。然而，这类问题往往是NP难题（NP-hard），并需要大量的专业知识和试错来解决。在许多实际生活的应用中，相似的组合优化问题一次又一次的出现，而每次面对具有相同形式、但数据不同的问题，却需要大量人力一遍又一遍的设计新的算法方案。基于图的组合优化问题多年来受到理论和算法设计界的广泛关注。 传统的解决NP-har">
@@ -369,7 +369,7 @@
 <li>部分解用有序列表表示：$S = \left( v _ { 1 } , v _ { 2 } , \ldots , v _ { | S | } \right) , v _ { i } \in V$，$\overline { S } = V \backslash S$ 表示剩余可往部分解添加的候选节点，此外，我们使用二元决策变量$x$的向量，每个维度$x_v$ 对应于一个节点$v \in V , x _ { v } = 1$ 当且仅当$v \in S$，在其他情形下$x_v$=0。我们还可以将$x_v$视为$v$上的标记或额外特性。</li>
 <li>函数$h(S)$将有序列表映射到满足问题特定约束的组合结构。</li>
 <li>部分解$S$的性质由目标函数$c(h(S);G)$给出，该目标函数基于$S$的组合结构$h$。</li>
-<li>一个通用的贪婪算法选择一个节点$v$来添加到部分解中，这个节点$v$可以最大化评价函数$Q ( h ( S ) , v )$ ，而评价函数是取决于基于当前部分解得到的组合结构$h(S)$ 。然后部分解就会扩展为$S : = \left( S , v ^ { <em> } \right) ,$ where $v ^ { </em> } : = \operatorname { argmax } _ { v \in \overline { S } } Q ( h ( S ) , v )$ ，$\left( S , v ^ { <em> } \right)$ 表示将节点$v^{</em>}$添加到部分解$S$中，这个步骤将会一直重复直到满足终止标准$t ( h ( S ) )$ 。</li>
+<li>一个通用的贪婪算法选择一个节点$v​$来添加到部分解中，这个节点$v​$可以最大化评价函数$Q ( h ( S ) , v )​$ ，而评价函数是取决于基于当前部分解得到的组合结构$h(S)​$ 。然后部分解就会扩展为$S : = \left( S , v ^ { \star } \right) ,​$ where $v ^ { \star } : = \operatorname { argmax } _ { v \in \overline { S } } Q ( h ( S ) , v )​$ ，$\left( S , v ^ { \star } \right)​$ 表示将节点$v^{\star}​$添加到部分解$S​$中，这个步骤将会一直重复直到满足终止标准  $t ( h ( S ) )​$ 。</li>
 </ul>
 <p>具体算法如下：</p>
 <p><img src="https://i.loli.net/2019/02/18/5c6a6a756eb78.png" alt=""></p>
