@@ -88,7 +88,7 @@
 <meta property="og:description" content="线性可分支持向量机给定一个特征空间上的训练数据集$\mathbb { D } = \left\{ \left( \vec { \mathbf { x } } _ { 1 } , \tilde { y } _ { 1 } \right) , \left( \vec { \mathbf { x } } _ { 2 } , \tilde { y } _ { 2 } \right) , \cdots ,">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://i.loli.net/2019/02/17/5c693d361a592.png">
-<meta property="og:updated_time" content="2019-02-17T12:12:48.313Z">
+<meta property="og:updated_time" content="2019-02-18T11:13:54.750Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="一步步推导SVM公式">
 <meta name="twitter:description" content="线性可分支持向量机给定一个特征空间上的训练数据集$\mathbb { D } = \left\{ \left( \vec { \mathbf { x } } _ { 1 } , \tilde { y } _ { 1 } \right) , \left( \vec { \mathbf { x } } _ { 2 } , \tilde { y } _ { 2 } \right) , \cdots ,">
@@ -341,8 +341,8 @@
 </ul>
 <p>假设训练数据集是线性可分的，则学习的目标是在特征空间中找到一个分离超平面，能将实例分到不同的类。</p>
 <p>分离超平面对应于方程 $\vec { \mathbf { w } } \cdot \vec { \mathbf { x } } + b = 0$，它由法向量$\vec { \mathbf { w } }$和截距$b$ 决定，可以由$( \vec { \mathbf { w } } , b )$表示。</p>
-<p>给定线性可分训练数据集，通过间隔最大化学习得到的分离超平面为：$\vec { w } ^ { <em> } \cdot \vec { x } + b ^ { </em> } = 0$，</p>
-<p>相应的分类决策函数：$f ( \vec { \mathbf { x } } ) = \operatorname { sign } \left( \vec { \mathbf { w } } ^ { <em> } \cdot \vec { \mathbf { x } } + b ^ { </em> } \right)$，称之为线性可分支持向量机。</p>
+<p>给定线性可分训练数据集，通过间隔最大化学习得到的分离超平面为：$\vec { w } ^ { \star } \cdot \vec { x } + b ^ { \star } = 0$，</p>
+<p>相应的分类决策函数：$f ( \vec { \mathbf { x } } ) = \operatorname { sign } \left( \vec { \mathbf { w } } ^ { \star } \cdot \vec { \mathbf { x } } + b ^ { \star } \right)​$，称之为线性可分支持向量机。</p>
 <p>当训练数据集线性可分时，存在无穷个分离超平面可以将两类数据正确分开。</p>
 <ul>
 <li>感知机利用误分类最小的策略，求出分离超平面。但是此时的解有无穷多个。</li>
