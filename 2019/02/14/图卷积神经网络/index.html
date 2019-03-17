@@ -89,7 +89,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://i.loli.net/2019/02/14/5c64d65a33bf5.png">
 <meta property="og:image" content="https://i.loli.net/2019/02/14/5c64d68246393.png">
-<meta property="og:updated_time" content="2019-02-15T07:56:01.699Z">
+<meta property="og:updated_time" content="2019-03-10T07:42:41.341Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MuMaXu&#39;s Blog">
 <meta name="twitter:description" content="背景自2012年以来，深度学习在计算机视觉以及自然语言处理两个领域取得了巨大的成功。和传统方法相比，它好在哪里呢？ 假设有一张图，要做分类，传统方法需要手动提取一些特征，比如纹理啊，颜色啊，或者一些更高级的特征。然后再把这些特征放到像随机森林等分类器，给到一个输出标签，告诉它是哪个类别。而深度学习是输入一张图，经过神经网络，直接输出一个标签。特征提取和分类一步到位，避免了手工提取特征或者人工规则，">
@@ -339,6 +339,8 @@
 <p>卷积神经网络很好，但是它研究的对象还是限制在Euclidean domains的数据。什么是Euclidean data？ Euclidean data最显著的特征就是有规则的空间结构，比如图片是规则的正方形栅格，比如语音是规则的一维序列。而这些数据结构能够用一维、二维的矩阵表示，卷积神经网络处理起来很高效。</p>
 <p><img src="https://i.loli.net/2019/02/14/5c64d68246393.png" alt=""></p>
 <p>但是，我们的现实生活中有很多数据并不具备规则的空间结构，称为Non Euclidean data。比如推荐系统、电子交易、计算几何、脑信号、分子结构等抽象出的图谱。这些图谱结构每个节点连接都不尽相同，有的节点有三个连接，有的节点有两个连接，是不规则的数据结构。</p>
+<h1 id="离散卷积"><a href="#离散卷积" class="headerlink" title="离散卷积"></a>离散卷积</h1><p>了解GCN之前必须对离散卷积（或者说CNN中的卷积）有一个明确的认识：<strong>离散卷积本质就是一种加权求和。</strong></p>
+<p>如图1所示，CNN中的卷积本质上就是利用一个共享参数的过滤器（kernel），</p>
 
       
     </div>
@@ -512,7 +514,7 @@ var jiathis_config={
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -595,7 +597,7 @@ var jiathis_config={
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#背景"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#背景"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#离散卷积"><span class="nav-number">2.</span> <span class="nav-text">离散卷积</span></a></li></ol></div>
             
 
           </div>
