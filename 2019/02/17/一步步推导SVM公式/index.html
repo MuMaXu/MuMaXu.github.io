@@ -88,7 +88,7 @@
 <meta property="og:description" content="线性可分支持向量机给定一个特征空间上的训练数据集$\mathbb { D } = \left\{ \left( \vec { \mathbf { x } } _ { 1 } , \tilde { y } _ { 1 } \right) , \left( \vec { \mathbf { x } } _ { 2 } , \tilde { y } _ { 2 } \right) , \cdots ,">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://i.loli.net/2019/02/17/5c693d361a592.png">
-<meta property="og:updated_time" content="2019-02-18T11:35:45.843Z">
+<meta property="og:updated_time" content="2019-03-18T01:57:53.304Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="一步步推导SVM公式">
 <meta name="twitter:description" content="线性可分支持向量机给定一个特征空间上的训练数据集$\mathbb { D } = \left\{ \left( \vec { \mathbf { x } } _ { 1 } , \tilde { y } _ { 1 } \right) , \left( \vec { \mathbf { x } } _ { 2 } , \tilde { y } _ { 2 } \right) , \cdots ,">
@@ -371,8 +371,14 @@
 <p>(1)是由于$w^Tx^{‘}=-b$</p>
 <h1 id="数学推导"><a href="#数学推导" class="headerlink" title="数学推导"></a>数学推导</h1><p>由上面的论述得到支持向量机模型为：</p>
 <p>目标函数：<script type="math/tex">\max _{ b , \mathbf { w } } \operatorname { margin } ( b , \mathbf { w } )</script></p>
-<p>约束条件：$y _ { n } \left( \mathbf { w } ^ { T } \mathbf { x } _ { n } + b \right) &gt; 0$，$for\ all\ n$</p>
-<script type="math/tex; mode=display">\operatorname { margin } ( b , w ) = \min _ { n = 1 , \ldots , N } \operatorname { distance } \left( \mathbf { x } _ { n } , b , w \right)</script><p>接下来就是一步步的推导了，其实推导的过程就是将上述的目标条件和约束条件一步步简化。</p>
+<p>约束条件：</p>
+<ul>
+<li>$y _ { n } \left( \mathbf { w } ^ { T } \mathbf { x } _ { n } + b \right) &gt; 0$，$for\ all\ n$</li>
+</ul>
+<ul>
+<li><script type="math/tex; mode=display">\operatorname { margin } ( b , w ) = \min _ { n = 1 , \ldots , N } \operatorname { distance } \left( \mathbf { x } _ { n } , b , w \right)=\min_{n=1,\ldots,N} \frac { 1 } { \| \mathbf { w } \| } \left| \mathbf { w } ^ { T } \mathbf { x } + b \right|</script></li>
+</ul>
+<p>接下来就是一步步的推导了，其实推导的过程就是将上述的目标条件和约束条件一步步简化。</p>
 <h2 id="将约束条件中的绝对值去掉"><a href="#将约束条件中的绝对值去掉" class="headerlink" title="将约束条件中的绝对值去掉"></a>将约束条件中的绝对值去掉</h2><p>因为$y _ { n } \left( \mathbf { w } ^ { T } \mathbf { x } _ { n } + b \right) &gt; 0$，所以$\left| \mathbf { w } ^ { T } \mathbf { x } + b \right|=y _ { n } \left( \mathbf { w } ^ { T } \mathbf { x } _ { n } + b \right)$</p>
 <p>则目标条件：<script type="math/tex">\max _{ b , \mathbf { w } } \operatorname { margin } ( b , \mathbf { w } )</script>，</p>
 <p>约束条件：</p>
