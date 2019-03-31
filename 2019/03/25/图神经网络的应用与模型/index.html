@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="图神经网络,GNN,">
 
 
 
@@ -80,9 +80,10 @@
 
 
 <meta name="description" content="简介神经网络近期的成功推动了模式识别和数据挖掘的研究，许多机器学习任务，例如目标检测，机器翻译，语音识别，曾经都严重依赖棘手的特征工程提取数据集的特征，现在已经被端到端的学习模式彻底改变，也就是卷积神经网络（CNN），长短时记忆网络（LSTM），和自编码（AE）。深度学习在许多领域的成功部分归功于快速发展的计算资源(如GPU)和大量训练数据，部分归功于深度学习从欧氏数据(如图像、文本和视频)中提取">
+<meta name="keywords" content="图神经网络,GNN">
 <meta property="og:type" content="article">
-<meta property="og:title" content="MuMaXu&#39;s Blog">
-<meta property="og:url" content="http://yoursite.com/2019/03/31/图神经网络的应用与模型/index.html">
+<meta property="og:title" content="图神经网络的模型与应用">
+<meta property="og:url" content="http://yoursite.com/2019/03/25/图神经网络的应用与模型/index.html">
 <meta property="og:site_name" content="MuMaXu&#39;s Blog">
 <meta property="og:description" content="简介神经网络近期的成功推动了模式识别和数据挖掘的研究，许多机器学习任务，例如目标检测，机器翻译，语音识别，曾经都严重依赖棘手的特征工程提取数据集的特征，现在已经被端到端的学习模式彻底改变，也就是卷积神经网络（CNN），长短时记忆网络（LSTM），和自编码（AE）。深度学习在许多领域的成功部分归功于快速发展的计算资源(如GPU)和大量训练数据，部分归功于深度学习从欧氏数据(如图像、文本和视频)中提取">
 <meta property="og:locale" content="zh-Hans">
@@ -92,9 +93,9 @@
 <meta property="og:image" content="https://i.loli.net/2019/02/26/5c74e4f7528c1.png">
 <meta property="og:image" content="https://i.loli.net/2019/02/26/5c74e51debe80.png">
 <meta property="og:image" content="https://i.loli.net/2019/02/26/5c74e5b9d281c.png">
-<meta property="og:updated_time" content="2019-03-31T13:09:26.402Z">
+<meta property="og:updated_time" content="2019-03-31T13:20:30.751Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="MuMaXu&#39;s Blog">
+<meta name="twitter:title" content="图神经网络的模型与应用">
 <meta name="twitter:description" content="简介神经网络近期的成功推动了模式识别和数据挖掘的研究，许多机器学习任务，例如目标检测，机器翻译，语音识别，曾经都严重依赖棘手的特征工程提取数据集的特征，现在已经被端到端的学习模式彻底改变，也就是卷积神经网络（CNN），长短时记忆网络（LSTM），和自编码（AE）。深度学习在许多领域的成功部分归功于快速发展的计算资源(如GPU)和大量训练数据，部分归功于深度学习从欧氏数据(如图像、文本和视频)中提取">
 <meta name="twitter:image" content="https://i.loli.net/2019/02/26/5c74e22698f42.png">
 
@@ -126,13 +127,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/03/31/图神经网络的应用与模型/">
+  <link rel="canonical" href="http://yoursite.com/2019/03/25/图神经网络的应用与模型/">
 
 
 
 
 
-  <title> | MuMaXu's Blog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title>图神经网络的模型与应用 | MuMaXu's Blog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -269,7 +270,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/31/图神经网络的应用与模型/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/25/图神经网络的应用与模型/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="XuHejun">
@@ -286,7 +287,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline"></h1>
+          <h1 class="post-title" itemprop="name headline">图神经网络的模型与应用</h1>
         
 
         <div class="post-meta">
@@ -298,8 +299,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-31T20:54:07+08:00">
-                2019-03-31
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-25T20:17:39+08:00">
+                2019-03-25
               </time>
             
 
@@ -321,8 +322,8 @@
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/GNN/" itemprop="url" rel="index">
-                    <span itemprop="name">GNN</span>
+                  <a href="/categories/图神经网络/" itemprop="url" rel="index">
+                    <span itemprop="name">图神经网络</span>
                   </a>
                 </span>
 
@@ -431,6 +432,14 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/图神经网络/" rel="tag"># 图神经网络</a>
+          
+            <a href="/tags/GNN/" rel="tag"># GNN</a>
+          
+        </div>
+      
 
       
       
@@ -440,8 +449,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/03/31/数据预处理/" rel="next" title="数据预处理">
-                <i class="fa fa-chevron-left"></i> 数据预处理
+              <a href="/2019/03/22/《剑指offer》week1/" rel="next" title="《剑指offer》week1">
+                <i class="fa fa-chevron-left"></i> 《剑指offer》week1
               </a>
             
           </div>
@@ -449,6 +458,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/27/《剑指offer》week2/" rel="prev" title="《剑指offer》 week2">
+                《剑指offer》 week2 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -564,7 +577,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-categories">
                 
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">分类</span>
                 
               </div>
@@ -575,7 +588,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-count">23</span>
                   <span class="site-state-item-name">标签</span>
                 
               </div>
