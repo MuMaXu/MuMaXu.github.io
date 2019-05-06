@@ -98,7 +98,7 @@
 <meta property="og:image" content="https://i.loli.net/2018/12/24/5c2089cff0681.png">
 <meta property="og:image" content="https://i.loli.net/2018/12/24/5c208e21d07ea.png">
 <meta property="og:image" content="https://i.loli.net/2018/12/24/5c20939e971a4.png">
-<meta property="og:updated_time" content="2019-03-05T08:47:51.006Z">
+<meta property="og:updated_time" content="2019-05-06T12:06:48.086Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="吴恩达序列模型————循环序列模型">
 <meta name="twitter:description" content="数学符号（输出y也是类似）$x ^ { ( i ) }$:表示第i个样本 $x ^ { ( i ) &amp;lt; t &amp;gt; }$：第i个样本第t个输入 $T _ { x } ^ { ( i ) }$:表示第i个样本的序列长度 循环神经网络为什么不用标准的神经网络 输入和输出数据在不同的例子中可以有不同的长度； 这种朴素的神经网络结果并不能共享从文本不同位置所学习到的特征。（如卷积神经网络中学到的特">
@@ -372,7 +372,7 @@
 <p><img src="https://i.loli.net/2018/12/24/5c2060a35968a.png" alt=""></p>
 <h2 id="梯度消失和梯度下降"><a href="#梯度消失和梯度下降" class="headerlink" title="梯度消失和梯度下降"></a>梯度消失和梯度下降</h2><h2 id="梯度消失"><a href="#梯度消失" class="headerlink" title="梯度消失"></a>梯度消失</h2><p>梯度消失指的是在反向传播的过程中，后面的输入的梯度很难通过反向传播传递到前面的单元，也即前面的单词很难影响后面的单词，RNN模型不擅长于捕捉这种长期的依赖关系，但在序列模型中我们要经常性地利用到这种长期的依赖关系</p>
 <h2 id="梯度爆炸"><a href="#梯度爆炸" class="headerlink" title="梯度爆炸"></a>梯度爆炸</h2><p>梯度爆炸一般容易发现，程序一般会返回NAN，提示数值溢出，我们可以通过梯度裁剪的方法，给定一个阈值，使得梯度不会超过这个阈值。所以相对而言，梯度消失更难以发现并难以解决。</p>
-<h1 id="门控循环单元"><a href="#门控循环单元" class="headerlink" title="门控循环单元"></a>门控循环单元</h1><h2 id="重置门和更新门"><a href="#重置门和更新门" class="headerlink" title="重置门和更新门"></a>重置门和更新门</h2><p>门控循环单元中的重置门(reset gate）和更新门(update gate）的输入均为当前时间步输$X^ {<t>}$ 与上一时间步隐藏状态 $H^ {<t-1>}$，输出由激活函数为$ sigmoid$函数的全连接层计算得到。</t-1></t></p>
+<h1 id="门控循环单元"><a href="#门控循环单元" class="headerlink" title="门控循环单元"></a>门控循环单元</h1><h2 id="重置门和更新门"><a href="#重置门和更新门" class="headerlink" title="重置门和更新门"></a>重置门和更新门</h2><p>门控循环单元中的重置门(reset gate）和更新门(update gate）的输入均为当前时间步输$X ^ {<t> }$ 与上一时间步隐藏状态 $H^ {<t-1> }$，输出由激活函数为$sigmoid$函数的全连接层计算得到。</t-1></t></p>
 <p><img src="https://i.loli.net/2018/12/24/5c2076b8e343f.png" alt=""></p>
 <p>假设隐藏单元个数为 h，给定时间步 t 的小批量输入$X ^{&lt; t&gt; } \in \mathbb { R } ^ { n \times d }$（样本数为 n，输入个数为 d）和上一时间步隐藏状态$H ^{&lt; t&gt; } \in \mathbb { R } ^ { n \times  h}$。重置门$R ^{&lt; t&gt; } \in \mathbb { R } ^ { n \times  h}$和更新门$Z ^{&lt; t&gt; } \in \mathbb { R } ^ { n \times h }$的计算如下：</p>
 <p>$\boldsymbol { R } _ { t } = \sigma \left( \boldsymbol { X } _ { t } \boldsymbol { W } _ { x r } + \boldsymbol { H } _ { t - 1 } \boldsymbol { W } _ { h r } + \boldsymbol { b } _ { r } \right)$</p>
@@ -385,7 +385,8 @@
 <h2 id="隐藏状态"><a href="#隐藏状态" class="headerlink" title="隐藏状态"></a>隐藏状态</h2><p>最后，时间步 t 的隐藏状态$\boldsymbol { H }  ^ { <t> } \in \mathbb { R } ^ { n \times h }$的计算使用当前时间步的更新$Z^ {<t>}$来对上一时间步的隐藏状态$H^ {<t-1>}$和当前时间步的候选隐藏状态$\tilde { H } _ { t }$做组合：</t-1></t></t></p>
 <p>$H ^ { <t> } = Z ^ { <t> } \odot H ^ { <t 1="" -=""> } + \left( 1 - Z ^ { <t> } \right) \odot \tilde { H } ^ { <t> }$</t></t></t></t></t></p>
 <p><img src="https://i.loli.net/2018/12/24/5c207bdf49939.png" alt=""></p>
-<p>值得注意的是，更新门可以控制隐藏状态应该如何被包含当前时间步信息的候选隐藏状态所更新，如图所示假设更新门在时间步 t′ 到 t（t′ &lt; t）之间一直近似 1。那么，在时间步 t′ 到t 之间的输入信息几乎没有流入时间步 t 的隐藏状态$H^{<t>}$。实际上，这可以看作是较早时刻的隐藏状态$H ^ { t ^ { \prime } - 1 }$一直通过时间保存并传递至当前时间步 t。这个设计可以应对循环神经网络中的梯度衰减问题，并更好地捕捉时间序列中时间步距离较大的依赖关系。<br>我们对门控循环单元的设计稍作总结：</t></p>
+<p>值得注意的是，更新门可以控制隐藏状态应该如何被包含当前时间步信息的候选隐藏状态所更新，如图所示假设更新门在时间步 t′ 到 t（t′ &lt; t）之间一直近似 1。那么，在时间步 t′ 到t 之间的输入信息几乎没有流入时间步 t 的隐藏状态$H^{<t>}$。实际上，这可以看作是较早时刻的隐藏状态$H ^ { t ^ { \prime } - 1 }$一直通过时间保存并传递至当前时间步 t。这个设计可以应对循环神经网络中的梯度衰减问题，并更好地捕捉时间序列中时间步距离较大的依赖关系。</t></p>
+<p>我们对门控循环单元的设计稍作总结：</p>
 <p><strong>重置门有助于捕捉时间序列里短期的依赖关系。</strong><br><strong>更新门有助于捕捉时间序列里长期的依赖关系。</strong></p>
 <h1 id="长短期记忆（LSTM）"><a href="#长短期记忆（LSTM）" class="headerlink" title="长短期记忆（LSTM）"></a>长短期记忆（LSTM）</h1><p>LSTM 中引入了三个门：输入门（input gate）、遗忘门（forget gate）和输出门（output gate），以及与隐藏状态形状相同的记忆细胞（某些文献把记忆细胞当成一种<strong>特殊隐藏状态</strong>），从而记录额外的信息。</p>
 <h2 id="输入门、遗忘门和输出门"><a href="#输入门、遗忘门和输出门" class="headerlink" title="输入门、遗忘门和输出门"></a>输入门、遗忘门和输出门</h2><p>同门控循环单元中的重置门和更新门一样，如图所示，长短期记忆的门的输入均为<strong>当前时间步输入$X^{<t>}$与上一时间步隐藏状态$H^{<t-1>}$</t-1></t></strong>，输出由激活函数为$sigmoid$函数的<strong>全连接层</strong>计算得到。如此一来，这三个门元素的值域均为 [0, 1]。</p>
@@ -417,7 +418,7 @@
 <p>$O ^ { <t> } = H ^ { <t> } W _ { h q } + b _ { q }$</t></t></p>
 <h1 id="深度循环神经网络"><a href="#深度循环神经网络" class="headerlink" title="深度循环神经网络"></a>深度循环神经网络</h1><p>到目前为止介绍的循环神经网络只有一个单向的隐藏层，在深度学习应用，我们通常会到含用有多个隐藏层的循环神经网络，也称作深度循环神经网络。图演示了一个有L 个隐藏层的深度循环神经网络，每个隐藏状态不断传递至当前层的下一时间步和当前时间步的下一层。</p>
 <p><img src="https://i.loli.net/2018/12/24/5c20939e971a4.png" alt=""></p>
-<p>具体来说，在时间步t 里，设小批量输入$X ^ { <t> } \in \mathbb { R } ^ { n \times d }$（样本数为n，输入个数为d），第$ℓ$ 隐藏层$（ℓ = 1; …;T）$的隐藏状态为$\boldsymbol { H } ^ { <t>( \ell ) } \in \mathbb { R } ^ { n \times h }$（隐藏单元个数为h），输出层变量为$O ^ { <t> } \in \mathbb { R } ^ { n \times q }$（输出个数为q），且隐藏层的激活函数为$ϕ$。第1 隐藏层的隐藏状态和之前的计算一样：</t></t></t></p>
+<p>具体来说，在时间步t 里，设小批量输入$X ^ { <t> } \in \mathbb { R } ^ { n \times d }​$（样本数为n，输入个数为d），第$ℓ​$ 隐藏层$（ℓ = 1; …;T）​$的隐藏状态为$\boldsymbol { H } ^ { <t>( \ell ) } \in \mathbb { R } ^ { n \times h }​$（隐藏单元个数为h），输出层变量为$O ^ { <t> } \in \mathbb { R } ^ { n \times q }​$（输出个数为q），且隐藏层的激活函数为$ϕ​$。第1 隐藏层的隐藏状态和之前的计算一样：</t></t></t></p>
 <p>$H ^ { <t>  ( 1 ) } = \phi \left( X ^ { <t> } W _ { x h } ^ { ( 1 ) } + H ^ { <t 1="" -=""> ( 1 ) } W _ { h h } ^ { ( 1 ) } + b _ { h } ^ { ( 1 ) } \right)$</t></t></t></p>
 <p>当$1 &lt; ℓ &lt;L$ 时，第ℓ 隐藏层的隐藏状态的表达式为</p>
 <p>$H ^ { <t>  ( \ell ) } = \phi \left( H ^ { <t>  ( \ell - 1 ) } \boldsymbol { W } _ { x h } ^ { ( \ell ) } + H ^ { <t 1="" -="">( \ell ) } \boldsymbol { W } _ { h h } ^ { ( \ell ) } + b _ { h } ^ { ( \ell ) } \right)$</t></t></t></p>
