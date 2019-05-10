@@ -101,7 +101,7 @@
 <meta property="og:image" content="https://i.loli.net/2019/05/10/5cd52c4387f5f.png">
 <meta property="og:image" content="https://i.loli.net/2019/05/10/5cd52da965231.png">
 <meta property="og:image" content="https://i.loli.net/2019/05/10/5cd5382e9d265.png">
-<meta property="og:updated_time" content="2019-05-10T08:38:43.626Z">
+<meta property="og:updated_time" content="2019-05-10T08:47:53.294Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="神经网络和深度学习—优化算法">
 <meta name="twitter:description" content="写在前面本篇博客是根据我之前在实验室汇报的时候做的一个PPT的内容来写的，有部分内容应该是借鉴了其它一些博客还有一些讲义，由于年代久远，就不贴上参考链接了，如有侵犯内容的，实属抱歉。 引入在介绍神经网路里面的一些优化方法的时候，需要讲一下指数加权平均的思想，因为这与我们后面要将的动量是由很大的关系。 首先我们看一下平均数求法： 比如我们现在有100天的温度值，要求这100天的平均温度值。 24，2">
@@ -464,7 +464,7 @@ J(\theta)=\frac{1}{2 m} \sum_{i=1}^{m}\left(y^{i}-h_{\theta}\left(x^{i}\right)\r
 <p><img src="https://i.loli.net/2019/05/10/5cd52da965231.png" alt=""></p>
 <h1 id="Adam"><a href="#Adam" class="headerlink" title="Adam"></a>Adam</h1><p><code>Adam</code>优化算法的基本思想就是将<code>Momentum</code>和<code>RMSprop</code>结合起来形成的一种适用于不同深度学习结构的优化算法。</p>
 <p><img src="https://i.loli.net/2019/05/10/5cd5382e9d265.png" alt=""></p>
-<p>Adam实现了集成动量+自适应学习率，是目前比较好的优化算法。</p>
+<p>Adam实现了集成动量(V的那一部分)+自适应学习率(S表示的的是学习率)，是目前比较好的优化算法。</p>
 
       
     </div>
