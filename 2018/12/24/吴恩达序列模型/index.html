@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="RNN、GRU、LSTM,">
+  <meta name="keywords" content="RNN,GRU,LSTM,">
 
 
 
@@ -80,7 +80,7 @@
 
 
 <meta name="description" content="数学符号（输出y也是类似）$x ^ { ( i ) }$:表示第i个样本 $x ^ { ( i ) &amp;lt; t &amp;gt; }$：第i个样本第t个输入 $T _ { x } ^ { ( i ) }$:表示第i个样本的序列长度 循环神经网络为什么不用标准的神经网络 输入和输出数据在不同的例子中可以有不同的长度； 这种朴素的神经网络结果并不能共享从文本不同位置所学习到的特征。（如卷积神经网络中学到的特">
-<meta name="keywords" content="RNN、GRU、LSTM">
+<meta name="keywords" content="RNN,GRU,LSTM">
 <meta property="og:type" content="article">
 <meta property="og:title" content="吴恩达序列模型————循环序列模型">
 <meta property="og:url" content="http://yoursite.com/2018/12/24/吴恩达序列模型/index.html">
@@ -98,7 +98,7 @@
 <meta property="og:image" content="https://i.loli.net/2018/12/24/5c2089cff0681.png">
 <meta property="og:image" content="https://i.loli.net/2018/12/24/5c208e21d07ea.png">
 <meta property="og:image" content="https://i.loli.net/2018/12/24/5c20939e971a4.png">
-<meta property="og:updated_time" content="2019-05-06T12:06:48.086Z">
+<meta property="og:updated_time" content="2019-06-22T08:48:07.798Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="吴恩达序列模型————循环序列模型">
 <meta name="twitter:description" content="数学符号（输出y也是类似）$x ^ { ( i ) }$:表示第i个样本 $x ^ { ( i ) &amp;lt; t &amp;gt; }$：第i个样本第t个输入 $T _ { x } ^ { ( i ) }$:表示第i个样本的序列长度 循环神经网络为什么不用标准的神经网络 输入和输出数据在不同的例子中可以有不同的长度； 这种朴素的神经网络结果并不能共享从文本不同位置所学习到的特征。（如卷积神经网络中学到的特">
@@ -315,6 +315,28 @@
           </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/机器学习/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -405,7 +427,7 @@
 <p><img src="https://i.loli.net/2018/12/24/5c2088fbdb396.png" alt=""></p>
 <h2 id="隐藏状态-1"><a href="#隐藏状态-1" class="headerlink" title="隐藏状态"></a>隐藏状态</h2><p>有了记忆细胞以后，接下来我们还可以通过输出门来控制从记忆细胞到隐藏状态$H ^ { <t> } \in \mathbb { R } ^ { n \times h }$的信息的流动：</t></p>
 <p>$H ^ { <t> } = O ^ { <t> } \odot \tanh \left( C ^ { <t> } \right)$</t></t></t></p>
-<p>这里的tanh 函数确保隐藏状态元素值在-1 到1 之间。需要注意的是，当输出门近似1 时，记忆细胞信息将传递到隐藏状态供输出层使用；当输出门近似0 时，记忆细胞信息只自己保留。图展示了长短期记忆中隐藏状态的计算。</p>
+<p>这里的tanh 函数确保隐藏状态元素值在-1到1 之间。需要注意的是，当输出门近似1 时，记忆细胞信息将传递到隐藏状态供输出层使用；当输出门近似0 时，记忆细胞信息只自己保留。图展示了长短期记忆中隐藏状态的计算。</p>
 <p><img src="https://i.loli.net/2018/12/24/5c2089cff0681.png" alt=""></p>
 <h2 id="理解"><a href="#理解" class="headerlink" title="理解"></a>理解</h2><p>遗忘门的作用是让循环神经网络“忘记”之前没有用的信息。比如一段文章先介绍了某地原来是绿水蓝天，但后来被污染了。于是在看到被污染了之后，循环神经网络应该“忘记”之前绿水蓝天的状态。这个工作是通过遗忘门来完成的。</p>
 <p>在循环神经网络“忘记”了部分之前的状态后，它还需要从当前的输入补充最新的记忆。比如当看到文章中提到环境被污染之后，模型需要将这个信息写入到新的状态中。这个过程就是输入门完成的。</p>
@@ -468,7 +490,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/RNN、GRU、LSTM/" rel="tag"># RNN、GRU、LSTM</a>
+            <a href="/tags/RNN/" rel="tag"># RNN</a>
+          
+            <a href="/tags/GRU/" rel="tag"># GRU</a>
+          
+            <a href="/tags/LSTM/" rel="tag"># LSTM</a>
           
         </div>
       
@@ -598,7 +624,7 @@ var jiathis_config={
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">39</span>
+                  <span class="site-state-item-count">37</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -608,10 +634,10 @@ var jiathis_config={
               
               
               <div class="site-state-item site-state-categories">
-                
-                  <span class="site-state-item-count">14</span>
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">分类</span>
-                
+                </a>
               </div>
             
 
