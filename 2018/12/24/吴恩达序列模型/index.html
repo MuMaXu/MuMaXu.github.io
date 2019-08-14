@@ -98,7 +98,7 @@
 <meta property="og:image" content="https://i.loli.net/2018/12/24/5c2089cff0681.png">
 <meta property="og:image" content="https://i.loli.net/2018/12/24/5c208e21d07ea.png">
 <meta property="og:image" content="https://i.loli.net/2018/12/24/5c20939e971a4.png">
-<meta property="og:updated_time" content="2019-06-22T08:48:07.798Z">
+<meta property="og:updated_time" content="2019-08-13T09:00:55.885Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="吴恩达序列模型————循环序列模型">
 <meta name="twitter:description" content="数学符号（输出y也是类似）$x ^ { ( i ) }$:表示第i个样本 $x ^ { ( i ) &amp;lt; t &amp;gt; }$：第i个样本第t个输入 $T _ { x } ^ { ( i ) }$:表示第i个样本的序列长度 循环神经网络为什么不用标准的神经网络 输入和输出数据在不同的例子中可以有不同的长度； 这种朴素的神经网络结果并不能共享从文本不同位置所学习到的特征。（如卷积神经网络中学到的特">
@@ -394,7 +394,7 @@
 <p><img src="https://i.loli.net/2018/12/24/5c2060a35968a.png" alt=""></p>
 <h2 id="梯度消失和梯度下降"><a href="#梯度消失和梯度下降" class="headerlink" title="梯度消失和梯度下降"></a>梯度消失和梯度下降</h2><h2 id="梯度消失"><a href="#梯度消失" class="headerlink" title="梯度消失"></a>梯度消失</h2><p>梯度消失指的是在反向传播的过程中，后面的输入的梯度很难通过反向传播传递到前面的单元，也即前面的单词很难影响后面的单词，RNN模型不擅长于捕捉这种长期的依赖关系，但在序列模型中我们要经常性地利用到这种长期的依赖关系</p>
 <h2 id="梯度爆炸"><a href="#梯度爆炸" class="headerlink" title="梯度爆炸"></a>梯度爆炸</h2><p>梯度爆炸一般容易发现，程序一般会返回NAN，提示数值溢出，我们可以通过梯度裁剪的方法，给定一个阈值，使得梯度不会超过这个阈值。所以相对而言，梯度消失更难以发现并难以解决。</p>
-<h1 id="门控循环单元"><a href="#门控循环单元" class="headerlink" title="门控循环单元"></a>门控循环单元</h1><h2 id="重置门和更新门"><a href="#重置门和更新门" class="headerlink" title="重置门和更新门"></a>重置门和更新门</h2><p>门控循环单元中的重置门(reset gate）和更新门(update gate）的输入均为当前时间步输$X ^ {<t> }$ 与上一时间步隐藏状态 $H^ {<t-1> }$，输出由激活函数为$sigmoid$函数的全连接层计算得到。</t-1></t></p>
+<h1 id="门控循环单元"><a href="#门控循环单元" class="headerlink" title="门控循环单元"></a>门控循环单元</h1><h2 id="重置门和更新门"><a href="#重置门和更新门" class="headerlink" title="重置门和更新门"></a>重置门和更新门</h2><p>门控循环单元中的重置门(<code>reset gate</code>）和更新门(<code>update gate</code>）的输入均为当前时间步输$X ^ {<t> }$ 与上一时间步隐藏状态 $H^ {<t-1> }$，输出由激活函数为$sigmoid$函数的全连接层计算得到。</t-1></t></p>
 <p><img src="https://i.loli.net/2018/12/24/5c2076b8e343f.png" alt=""></p>
 <p>假设隐藏单元个数为 h，给定时间步 t 的小批量输入$X ^{&lt; t&gt; } \in \mathbb { R } ^ { n \times d }$（样本数为 n，输入个数为 d）和上一时间步隐藏状态$H ^{&lt; t&gt; } \in \mathbb { R } ^ { n \times  h}$。重置门$R ^{&lt; t&gt; } \in \mathbb { R } ^ { n \times  h}$和更新门$Z ^{&lt; t&gt; } \in \mathbb { R } ^ { n \times h }$的计算如下：</p>
 <p>$\boldsymbol { R } _ { t } = \sigma \left( \boldsymbol { X } _ { t } \boldsymbol { W } _ { x r } + \boldsymbol { H } _ { t - 1 } \boldsymbol { W } _ { h r } + \boldsymbol { b } _ { r } \right)$</p>
@@ -413,11 +413,11 @@
 <h1 id="长短期记忆（LSTM）"><a href="#长短期记忆（LSTM）" class="headerlink" title="长短期记忆（LSTM）"></a>长短期记忆（LSTM）</h1><p>LSTM 中引入了三个门：输入门（input gate）、遗忘门（forget gate）和输出门（output gate），以及与隐藏状态形状相同的记忆细胞（某些文献把记忆细胞当成一种<strong>特殊隐藏状态</strong>），从而记录额外的信息。</p>
 <h2 id="输入门、遗忘门和输出门"><a href="#输入门、遗忘门和输出门" class="headerlink" title="输入门、遗忘门和输出门"></a>输入门、遗忘门和输出门</h2><p>同门控循环单元中的重置门和更新门一样，如图所示，长短期记忆的门的输入均为<strong>当前时间步输入$X^{<t>}$与上一时间步隐藏状态$H^{<t-1>}$</t-1></t></strong>，输出由激活函数为$sigmoid$函数的<strong>全连接层</strong>计算得到。如此一来，这三个门元素的值域均为 [0, 1]。</p>
 <p><img src="https://i.loli.net/2018/12/24/5c20848249240.png" alt=""></p>
-<p>具体来说，假设隐藏单元个数为 h，给定时间步 t 的小批量输入$X ^ {&lt; t&gt; } \in \mathbb { R } ^ { n \times d }$（样本数为 n，输入个数为 d）和上一时间步隐藏状态$H ^ { <t 1="" -=""> } \in \mathbb { R } ^ { n \times h }$。时间步 t 的输入门$I ^ { <t> } \in \mathbb { R } ^ { n \times h }$、遗忘门$F ^ { <t> } \in \mathbb { R } ^ { n \times h }$和输出门$O^ { <t> } \in \mathbb { R } ^ { n \times h }$分别计算如下：</t></t></t></t></p>
+<p>具体来说，假设隐藏单元个数为$h$，给定时间步$t$的小批量输入$X ^ {&lt; t&gt; } \in \mathbb { R } ^ { n \times d }$（样本数为 n，输入个数为 d）和上一时间步隐藏状态$H ^ { <t 1="" -=""> } \in \mathbb { R } ^ { n \times h }$。时间步 t 的输入门$I ^ { <t> } \in \mathbb { R } ^ { n \times h }$、遗忘门$F ^ { <t> } \in \mathbb { R } ^ { n \times h }$和输出门$O^ { <t> } \in \mathbb { R } ^ { n \times h }$分别计算如下：</t></t></t></t></p>
 <p>$\boldsymbol { I } ^ { <t> } = \sigma \left( \boldsymbol { X } ^ { <t> } \boldsymbol { W } _ { x i } + \boldsymbol { H } ^ { <t 1="" -=""> } \boldsymbol { W } _ { h i } + b _ { i } \right)$</t></t></t></p>
 <p>$\boldsymbol { F } ^ { <t> } = \sigma \left( \boldsymbol { X } ^ { <t> } \boldsymbol { W } _ { x f } + \boldsymbol { H } ^ { <t 1="" -=""> } \boldsymbol { W } _ { h f } + \boldsymbol { b } _ { f } \right)$</t></t></t></p>
 <p>$O ^ { <t> } = \sigma \left( \boldsymbol { X } ^ { <t> } \boldsymbol { W } _ { x o } + \boldsymbol { H } ^ { <t 1="" -=""> } \boldsymbol { W } _ { h o } + \boldsymbol { b } _ { o } \right)$</t></t></t></p>
-<h2 id="候选记忆细胞"><a href="#候选记忆细胞" class="headerlink" title="候选记忆细胞"></a>候选记忆细胞</h2><p>接下来，长短期记忆需要计算候选记忆细胞 $\tilde { C } _ { t }$。它的计算同上面介绍的三个门类似，但使用了值域在 [−1, 1] 的 tanh 函数做激活函数，如图所示：</p>
+<h2 id="候选记忆细胞"><a href="#候选记忆细胞" class="headerlink" title="候选记忆细胞"></a>候选记忆细胞</h2><p>接下来，长短期记忆需要计算候选记忆细胞 $\tilde { C } _ { t }$。它的计算同上面介绍的三个门类似，但使用了值域在 [−1, 1] 的 $tanh$函数做激活函数，如图所示：</p>
 <p><img src="https://i.loli.net/2018/12/24/5c2086af7ebae.png" alt=""></p>
 <p>具体来说，时间步 t 的候选记忆细胞 $\tilde { C } _ { t }$的计算为：</p>
 <p>$\tilde { C } _ { t } = \tanh \left( \boldsymbol { X } _ { t } \boldsymbol { W } _ { x c } + \boldsymbol { H } _ { t - 1 } \boldsymbol { W } _ { h c } + \boldsymbol { b } _ { c } \right)$</p>
@@ -427,7 +427,7 @@
 <p><img src="https://i.loli.net/2018/12/24/5c2088fbdb396.png" alt=""></p>
 <h2 id="隐藏状态-1"><a href="#隐藏状态-1" class="headerlink" title="隐藏状态"></a>隐藏状态</h2><p>有了记忆细胞以后，接下来我们还可以通过输出门来控制从记忆细胞到隐藏状态$H ^ { <t> } \in \mathbb { R } ^ { n \times h }$的信息的流动：</t></p>
 <p>$H ^ { <t> } = O ^ { <t> } \odot \tanh \left( C ^ { <t> } \right)$</t></t></t></p>
-<p>这里的tanh 函数确保隐藏状态元素值在-1到1 之间。需要注意的是，当输出门近似1 时，记忆细胞信息将传递到隐藏状态供输出层使用；当输出门近似0 时，记忆细胞信息只自己保留。图展示了长短期记忆中隐藏状态的计算。</p>
+<p>这里的tanh 函数确保隐藏状态元素值在-1到1 之间。需要注意的是，当输出门近似1 时，记忆细胞信息将传递到隐藏状态供输出层使用；当输出门近似0时，记忆细胞信息只自己保留。图展示了长短期记忆中隐藏状态的计算。</p>
 <p><img src="https://i.loli.net/2018/12/24/5c2089cff0681.png" alt=""></p>
 <h2 id="理解"><a href="#理解" class="headerlink" title="理解"></a>理解</h2><p>遗忘门的作用是让循环神经网络“忘记”之前没有用的信息。比如一段文章先介绍了某地原来是绿水蓝天，但后来被污染了。于是在看到被污染了之后，循环神经网络应该“忘记”之前绿水蓝天的状态。这个工作是通过遗忘门来完成的。</p>
 <p>在循环神经网络“忘记”了部分之前的状态后，它还需要从当前的输入补充最新的记忆。比如当看到文章中提到环境被污染之后，模型需要将这个信息写入到新的状态中。这个过程就是输入门完成的。</p>
