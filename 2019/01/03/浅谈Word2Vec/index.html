@@ -88,7 +88,7 @@
 <meta property="og:description" content="什么是Word2VecWord2Vec是从大量文本语料中以有监督的方式学习语义知识的一种模型，它被大量地用在自然语言处理（NLP）中。那么它是如何帮助我们做自然语言处理呢？Word2Vec其实就是通过学习文本来用词向量的方式表征词的语义信息，即通过一个嵌入空间使得语义上相似的单词在该空间内距离很近。Embedding其实就是一个映射，将单词从原先所属的空间映射到新的多维空间中，也就是把原先词所在空">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://i.loli.net/2019/01/03/5c2da7240a566.png">
-<meta property="og:image" content="https://i.loli.net/2019/01/03/5c2dae0394efc.png">
+<meta property="og:image" content="https://i.loli.net/2019/11/02/dAjyHn5kaIPKQcs.png">
 <meta property="og:image" content="https://i.loli.net/2019/01/01/5c2b35ad4d2ad.png">
 <meta property="og:image" content="https://i.loli.net/2019/01/01/5c2b41f1242fc.png">
 <meta property="og:image" content="https://i.loli.net/2019/01/01/5c2b428a1584d.png">
@@ -98,8 +98,9 @@
 <meta property="og:image" content="https://i.loli.net/2019/01/03/5c2dc035a13c8.png">
 <meta property="og:image" content="https://i.loli.net/2019/01/01/5c2b4781140f0.png">
 <meta property="og:image" content="https://www.zhihu.com/equation?tex=w_i">
+<meta property="og:image" content="https://i.loli.net/2019/11/02/upRUZfe5LYrm3zS.png">
 <meta property="og:image" content="https://i.loli.net/2019/01/03/5c2dca9d5da8e.png">
-<meta property="og:updated_time" content="2019-06-22T08:57:19.176Z">
+<meta property="og:updated_time" content="2019-11-02T12:06:32.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="浅谈Word2Vec">
 <meta name="twitter:description" content="什么是Word2VecWord2Vec是从大量文本语料中以有监督的方式学习语义知识的一种模型，它被大量地用在自然语言处理（NLP）中。那么它是如何帮助我们做自然语言处理呢？Word2Vec其实就是通过学习文本来用词向量的方式表征词的语义信息，即通过一个嵌入空间使得语义上相似的单词在该空间内距离很近。Embedding其实就是一个映射，将单词从原先所属的空间映射到新的多维空间中，也就是把原先词所在空">
@@ -381,7 +382,7 @@
 <p>接下来让我们一步一步理解这个过程，首先从定义表示法开始。</p>
 <h2 id="定义表示法"><a href="#定义表示法" class="headerlink" title="定义表示法"></a>定义表示法</h2><h3 id="one-hot向量"><a href="#one-hot向量" class="headerlink" title="one-hot向量"></a>one-hot向量</h3><p>one-hot向量就是利用一个$R ^ { | V | \times 1 }$向量来表示单词。|V|是词汇表中单词的数量。</p>
 <p>一个单词在英文词汇表中的索引位置是多少，那么相对应的那一行元素就是1，其他元素都是0。</p>
-<p>$w ^ {$word$} = \left| \begin{array} { c } { 0 } \\ { 0 } \\ { 0 } \\ { 0 } \\ { \vdots } \\ { 1 } \\ { \vdots } \\ { 0 } \end{array} \right|$</p>
+<p>$w ^ {word} = \left| \begin{array} { c } { 0 } \\ { 0 } \\ { 0 } \\ { 0 } \\ { \vdots } \\ { 1 } \\ { \vdots } \\ { 0 } \end{array} \right|$</p>
 <p>还是以我们的例句”Do you love deep learning”为例。</p>
 <p>love的one-hot向量就是：</p>
 <p>$w ^ { l o v e } = \left| \begin{array} { l } { 0 } \\ { 0 } \\ { 1 } \\ { 0 } \\ { 0 } \end{array} \right|$</p>
@@ -409,9 +410,9 @@
 <p>$v _ { c } = W w _ { c }$，这里W是$d \times V$的矩阵， $w _ { c }$ 是 $V \times 1$的矩阵，因此$v_c$是$d\times1$的向量。</p>
 <p>直观理解：<strong>矩阵与one-hot向量的内积，相当于把one-hot向量中索引为1在向量矩阵中对应的那一列提取出来。</strong></p>
 <p>第二步：求$u _ { x } ^ { T } v _ { c }$组成的向量。</p>
-<p>这个向量就是$W ^ { \prime } v _ { c }$，这里的$W ^ { \prime }$是$V\times d$ 的矩阵，$v_c$是$d\times1$ 的向量，因此$u _ { x } ^ { T } v _ { c }$是$V\times1$ 的向量。直观理解：**下面要说的很重要！用$W ^ { \prime }$与$\boldsymbol { v } _ { \mathcal { C } }$相乘，相当于$v_c$和词汇表中的所有词向量的转置都分别求内积，得到的结果组成了一个向量！</p>
+<p>这个向量就是$W ^ { \prime } v _ { c }$，这里的$W ^ { \prime }$是$V\times d$ 的矩阵，$v_c$是$d\times1$ 的向量，因此$u _ { x } ^ { T } v _ { c }$是$V\times1$ 的向量。直观理解：下面要说的很重要！用$W ^ { \prime }$与$\boldsymbol { v } _ { \mathcal { C } }$相乘，相当于$v_c$和词汇表中的所有词向量的转置都分别求内积，得到的结果组成了一个向量！</p>
 <p><strong>下图是直观描述。</strong></p>
-<p><img src="https://i.loli.net/2019/01/03/5c2dae0394efc.png" alt=""></p>
+<p><img src="https://i.loli.net/2019/11/02/dAjyHn5kaIPKQcs.png" alt=""></p>
 <p>第三步：求softmax</p>
 <p>这步比较简单，把得到的相似度矩阵代入softmax公式，就得到了一个满足概率分布的矩阵。</p>
 <h2 id="算法公式表达"><a href="#算法公式表达" class="headerlink" title="算法公式表达"></a>算法公式表达</h2><p>在跳字模型中，每个词被表示成两个d 维向量用来计算条件概率。假设这个词在词典中索引为i，当它为中心词时向量表示为$\boldsymbol { v } _ { i } \in \mathbb { R } ^ { d }$，而为背景词时向量表示为$\boldsymbol { u } _ { i } \in \mathbb { R } ^ { d }$设中心词$w _ { c }$在词典中索引为c，背景词$w _ { o }$在词典中索引为o，给定中心词生成背景词的条件概率可以通过对向量内积做softmax 运算而得到：</p>
@@ -429,8 +430,7 @@
 <h3 id="训练过程"><a href="#训练过程" class="headerlink" title="训练过程"></a>训练过程</h3><h4 id="训练集"><a href="#训练集" class="headerlink" title="训练集"></a>训练集</h4><p>假设我们有一个很大的文本库，在这个文本库中有这么一段话<strong>“The dog barked at the mailman”。</strong></p>
 <p>首先我们选句子中间的一个词作为我们的输入词，例如我们选取“dog”作为input word。有了input word以后，我们再定义一个叫做skip_window的参数，它代表着我们从当前input word的一侧（左边或右边）选取词的数量。如果我们设置skip_window=2，那么我们最终获得窗口中的词（包括input word在内）就是<strong>[‘The’, ‘dog’，’barked’, ‘at’]</strong>。skip_window=2代表着选取左input word左侧2个词和右侧2个词进入我们的窗口，所以整个窗口大小$span=2\times2$。另一个参数叫num_skips，它代表着我们从整个窗口中选取多少个不同的词作为我们的output word，当skip_window=2，num_skip2=2时，我们将会得到两组 (input word, output word) 形式的训练数据，即 <strong>(‘dog’, ‘barked’)，(‘dog’, ‘the’)</strong>。</p>
 <p><img src="https://i.loli.net/2019/01/01/5c2b35ad4d2ad.png" alt=""></p>
-<center>The quick brown fox jumps over lazy dog</center>
-
+<p><center>The quick brown fox jumps over lazy dog</center></p>
 <h4 id="模型细节"><a href="#模型细节" class="headerlink" title="模型细节"></a>模型细节</h4><p>我们如何来表示这些单词呢？</p>
 <p>首先，我们都知道神经网络只能接受数值输入，我们不可能把一个单词字符串作为输入，因此我们得想个办法来表示这些单词。最常用的办法就是基于训练文档来构建我们自己的词汇表（vocabulary）再对单词进行<strong>one-hot</strong>编码。</p>
 <p>假设从我们的训练文档中抽取出10000个唯一不重复的单词组成词汇表。我们对这10000个单词进行one-hot编码，得到的每个单词都是一个10000维的向量，向量每个维度的值只有0或者1，假如单词ants在词汇表中的出现位置为第3个，那么ants的向量就是一个第三维度取值为1，其他维都为0的10000维的向量(ants=[0,0,0,1,…,0])。</p>
@@ -536,11 +536,13 @@
 <p>回忆上节内容。跳字模型的核x心在于使用$softmax$运算得到给定中⼼词$w_c$来生成背景词$w_o$的条件概率</p>
 <p>$\mathbb { P } \left( w _ { o } | w _ { c } \right) = \frac { \exp \left( \boldsymbol { u } _ { o } ^ { \top } \boldsymbol { v } _ { c } \right) } { \sum _ { i \in \mathcal { V } } \exp \left( \boldsymbol { u } _ { i } ^ { \top } \boldsymbol { v } _ { c } \right) }$</p>
 <p>该条件概率相应的对数损失</p>
-<h2 id="层序SoftMax"><a href="#层序SoftMax" class="headerlink" title="层序SoftMax"></a>层序SoftMax</h2><p>使用层序$softmax$分类器（相当于一个树型分类器，每个节点都是可能是一个二分类器），其计算复杂度是前面的$log|v|$级别。在构造分级$softmax$分类器时，一般常用的词会放在树的顶部位置，而不常用的词则会放在树的更深处，其并不是一个平衡的二叉树。</p>
+<h2 id="层序SoftMax"><a href="#层序SoftMax" class="headerlink" title="层序SoftMax"></a>层序SoftMax</h2><p>使用层序$softmax$分类器（相当于一个树型分类器，每个节点都是可能是一个二分类器），其计算复杂度是前面的$log|v|$级别。在构造分级$softmax$分类器时，一般常用的词会放在树的顶部位置，而不常用的词则会放在树的更深处，其并不是一个平衡的二叉树。是一种从隐层到输出层Softmax的优化，</p>
+<p><img src="https://i.loli.net/2019/11/02/upRUZfe5LYrm3zS.png" alt=""></p>
+<p>计算某个单词被预测的概率就仅仅和该单词到hidden layer的神经元连接的唯一路径相关了，更新参数的时候计算量一下子降到了O(log(V))。</p>
 <p><img src="https://i.loli.net/2019/01/03/5c2dca9d5da8e.png" alt=""></p>
 <p>假设$L(w)$为从二叉树的根节点到词w 的叶子节点的路径（包括根和叶子节点）上的节点数。设$n(w,j)$为该路径上第j个节点，并设该节点的背景词向量为$\mathbf { u } _ { n ( w , j ) }$。以上图为例，$L(w_3) = 4$。层序softmax 将跳字模型中的条件概率近似表示为：</p>
 <p>$\mathbb { P } \left( w _ { o } | w _ { c } \right) = \prod _ { j = 1 } ^ { L \left( w _ { o } \right) - 1 } \sigma \left( \left[ n \left( w _ { o } , j + 1 \right) = \operatorname { leftchild } \left( n \left( w _ { o } , j \right) \right) \right] \cdot \mathbf { u } _ { n \left( w _ { o } , j \right) } ^ { \top } \mathbf { v } _ { c } \right)$</p>
-<p>其中$\sigma$函数与$sigmoid$激活函数的定义相同，$leftChild(n)$是节点n 的左孩子节点：如果判断x为真，$[ x ] = 1$；反之$[ x ] = -1$。让我们计算上图中给定词$w_c$生成词$w_3$的条件概率。我们需要将$w_c$的词向量$v_c$和根节点到$w_3$路径上的非叶子节点向量一一求内积。由于在二叉树中由根节点到叶子节点$w_3$的路径上需要向左、向右、再向左地遍历（图中加粗的路径），我们得到</p>
+<p>其中$\sigma$函数与$sigmoid$激活函数的定义相同，$leftChild(n)$是节点n 的左孩子节点：如果判断x为真，$[ x ] = 1$；反之$[ x ] = -1$。让我们计算上图中给定词$w_c$生成词$w_3$的条件概率。我们需要将$w_c$的词向量$v_c$和根节点到$w_3$路径上的非叶子节点向量一一求内积。由于在二叉树中由根节点到叶子节点$w_3$的路径上需要向左、向右、再向左地遍历（图中加粗的路径），我们得到</p>
 <p>$\mathbb { P } \left( w _ { 3 } | w _ { c } \right) = \sigma \left( \mathbf { u } _ { n \left( w _ { 3 } , 1 \right) } ^ { \top } \mathbf { v } _ { c } \right) \cdot \sigma \left( - \mathbf { u } _ { n \left( w _ { 3 } , 2 \right) } ^ { \top } \mathbf { v } _ { c } \right) \cdot \sigma \left( \mathbf { u } _ { n \left( w _ { 3 } , 3 \right) } ^ { T }v_c)\right.$</p>
 <p>由于 $\sigma ( x ) + \sigma ( - x ) = 1$，给定中心词$w_c$ 生成词典$\mathcal { V }$中任⼀词的条件概率之和为1 这一条件也将满足：</p>
 <p>$\sum _ { w \in \mathcal { V } } \mathbb { P } ( w | w _ { c } ) = 1$</p>
@@ -722,7 +724,7 @@ var jiathis_config={
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">37</span>
+                  <span class="site-state-item-count">39</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

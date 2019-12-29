@@ -92,7 +92,7 @@
 <meta property="og:image" content="https://i.loli.net/2019/03/31/5ca0885ea5253.png">
 <meta property="og:image" content="https://i.loli.net/2019/03/31/5ca08be137419.png">
 <meta property="og:image" content="https://i.loli.net/2019/03/31/5ca08e6e61d9a.png">
-<meta property="og:updated_time" content="2019-06-22T08:54:11.821Z">
+<meta property="og:updated_time" content="2019-11-07T02:42:06.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据预处理">
 <meta name="twitter:description" content="概述数据预处理和特征选择是数据挖掘与机器学习中关注的重要问题，坊间常说：数据和特征决定了机器学习的上限，而模型和算法只是逼近这个上限而已。特征工程就是将原始数据转化为有用的特征，更好的表示预测模型处理的实际问题，提升对于未知数据的预测准确性。 缺失值处理 数据缺失值的产生的原因多种多样，主要分为客观原因和人为原因。  客观原因：比如数据存储的失败、存储器损坏、机械故障导致某段时间数据未能收集（对于">
@@ -460,7 +460,6 @@
 <li>在每个完整的数据集上进行训练，得到训练后的模型以及评价函数值。</li>
 <li>对来自各个完整的数据集的结果，根据评价函数值进行选择，选择评价函数值最大的模型，其对应的插<br>值就是最终的插补值。</li>
 </ul>
-<p>​</p>
 </li>
 </ol>
 <h2 id="压缩感知-amp-amp-矩阵补全"><a href="#压缩感知-amp-amp-矩阵补全" class="headerlink" title="压缩感知 &amp;&amp; 矩阵补全"></a>压缩感知 &amp;&amp; 矩阵补全</h2><ol>
@@ -476,7 +475,6 @@
 <p>从数学意义上来看，这种做法没有解决任何问题。因为根据$\vec{\mathbf{y}}=\mathbf{A} \vec{\mathbf{s}}$， 从$\vec{\mathbf{y}}$中恢复$\vec{\mathbf{s}}$这个问题仍然是欠定的。</p>
 <p>但是在实际应用中发现，如果$\vec{\mathbf{s}}$具有稀疏性（即大量的分量为零），则该问题能够很好地求解。这是因为稀疏性使得未知因素的影响大大减少。</p>
 <p>此时$\Psi$称作稀疏基，而$A$的作用类似于字典，能够将信号转换为稀疏表示。</p>
-<p>​</p>
 </li>
 </ol>
 <h3 id="压缩感知"><a href="#压缩感知" class="headerlink" title="压缩感知"></a>压缩感知</h3><ol>
@@ -520,7 +518,6 @@
 \begin{array}{c}{\min _{\mathbf{X}}\|\mathbf{X}\|_{*}} \\ {\text {s.t.} \quad x_{i, j}=a_{i, j},(i, j) \in \Omega}\end{array}</script><p>该最优化问题是一个凸优化问题，可以通过半正定规划Semi-Definite Programming:SDP 求解。</p>
 </li>
 <li><p>理论研究表明：若$A$的秩为$r$，$n \leq m$，则只需要观察$O\left(m r \log ^{2} m\right)$个元素就能够完美恢复出$A$。</p>
-<p>​</p>
 </li>
 </ol>
 <h1 id="特征编码"><a href="#特征编码" class="headerlink" title="特征编码"></a>特征编码</h1><h2 id="特征二元化"><a href="#特征二元化" class="headerlink" title="特征二元化"></a>特征二元化</h2><ol>
@@ -540,7 +537,7 @@
 <p>解决的办法是采用独热码编码One-Hot Encoding 。</p>
 </li>
 <li><p><code>One-Hot Encoding</code>采用<code>N</code>位状态位来对<code>N</code>个可能的取值进行编码，每个取值都由独立的状态位来表示，并<br>且在任意时刻只有其中的一位有效。</p>
-<p>假设属性 的取值为非数值的离散集合$\left\{a_{1}, a_{2}, \cdots, a_{K}\right\}$，独热码将其扩展成 个属性，每个新属性代表属性$j$的一个状态位：若样本在属性$j$上的取值为$a_k$，则样本在新的属性$j_k$上的取值为 1，在新的属性$j_{1}, \cdots, j_{k-1}, j_{k+1}, \cdots, j_{K}$上的取值为 0 。</p>
+<p>假设属性 的取值为非数值的离散集合$\left\{a_{1}, a_{2}, \cdots, a_{K}\right\}$，独热码将其扩展成$K$个属性，每个新属性代表属性$j$的一个状态位：若样本在属性$j$上的取值为$a_k$，则样本在新的属性$j_k$上的取值为 1，在新的属性$j_{1}, \cdots, j_{k-1}, j_{k+1}, \cdots, j_{K}$上的取值为 0 。</p>
 <ul>
 <li><p>这种做法中，如果在$j_{1}, \cdots, j_{K}$上取值全为 0，则表示发生了缺失。</p>
 <blockquote>
@@ -565,9 +562,9 @@
 <p>这种划分的增益非常小，因为拆分之后：</p>
 <ul>
 <li>较小的那个拆分样本集，它占总样本的比例太小。无论增益多大，乘以该比例之后几乎可以忽略。</li>
+<li>较大的那个拆分样本集，它几乎就是原始的样本集，增益几乎为零。</li>
 </ul>
 </li>
-<li>较大的那个拆分样本集，它几乎就是原始的样本集，增益几乎为零。</li>
 </ul>
 </li>
 </ol>
@@ -693,11 +690,11 @@
 </ul>
 </li>
 </ol>
-<pre><code> - ``z-score`` 标准化：对于属性，设所有样本在属性 上的均值为，方差为。则标准化后的属性值为：
-   $$
-   \hat{x}_{i, j}=\frac{x_{i, j}-j_{\min }}{j_{\max }-j_{\min }}
-   $$
-</code></pre><ol>
+<ul>
+<li>z-score 标准化：对于属性，设所有样本在属性 上的均值为，方差为。则标准化后的属性值为：<script type="math/tex; mode=display">
+\hat{x}_{i, j}=\frac{x_{i, j}-j_{\min }}{j_{\max }-j_{\min }}</script></li>
+</ul>
+<ol>
 <li><p>注意：如果数据集分为训练集、验证集和测试集，则：训练集、验证集、测试集使用相同标准化参数，该参数的值都是从训练集中得到。</p>
 <ul>
 <li><p>如果使用<code>min-max</code>标准化，则属性$j$的标准化参数$j_{max}、j_{min}$都是从训练集中计算得到。</p>
@@ -821,10 +818,16 @@ g(\mathbb{D}, \mathbb{A})=H(\mathbb{D})-H(\mathbb{D} | \mathbb{A})=H(\mathbb{D})
 <li><p>常见的特征选择方法大致可分为三类：过滤式<code>filter</code> 、包裹式<code>wrapper</code> 、嵌入式<code>embedding</code> 。</p>
 </li>
 </ol>
-<h2 id="过滤式选择"><a href="#过滤式选择" class="headerlink" title="过滤式选择"></a>过滤式选择</h2><ol>
+<h2 id="过滤式选择"><a href="#过滤式选择" class="headerlink" title="过滤式选择"></a>过滤式选择</h2><p>上面我们已经讲到了使用特征方差来过滤选择特征的过程。除了特征的方差这第一种方法，还有其他一些统计学指标可以使用。</p>
+<p>第二个可以使用的是相关系数。这个主要用于输出连续值的监督学习算法中。我们分别计算所有训练集中各个特征与输出值之间的相关系数，设定一个阈值，选择相关系数较大的部分特征。</p>
+<p>第三个可以使用的是假设检验，比如卡方检验。卡方检验可以检验某个特征分布和输出值分布之间的相关性。个人觉得它比比粗暴的方差法好用。如果大家对卡方检验不熟悉，可以参看这篇<a href="https://segmentfault.com/a/1190000003719712" target="_blank" rel="noopener">卡方检验原理及应用</a>，这里就不展开了。在sklearn中，可以使用chi2这个类来做卡方检验得到所有特征的卡方值与显著性水平P临界值，我们可以给定卡方值阈值， 选择卡方值较大的部分特征。</p>
+<p>除了卡方检验，我们还可以使用F检验和t检验，它们都是使用假设检验的方法，只是使用的统计分布不是卡方分布，而是F分布和t分布而已。在sklearn中，有F检验的函数f_classif和f_regression，分别在分类和回归特征选择时使用。</p>
+<p>第四个是互信息，即从信息熵的角度分析各个特征和输出值之间的关系评分。在<a href="http://www.cnblogs.com/pinard/p/6050306.html" target="_blank" rel="noopener">决策树</a>算法中我们讲到过互信息（信息增益）。互信息值越大，说明该特征和输出值之间的相关性越大，越需要保留。在sklearn中，可以使用mutual_info_classif(分类)和mutual_info_regression(回归)来计算各个输入特征和输出值之间的互信息。</p>
+<p>以上就是过滤法的主要方法，个人经验是，在没有什么思路的 时候，可以优先使用卡方检验和互信息来做特征选择</p>
+<ol>
 <li><p>过滤式方法先对数据集进行特征选择，然后再训练学习器，特征选择过程与后续学习器无关。<br>这相当于先用特征选择过程对初始特征进行过滤，再用过滤后的特征来训练模型。</p>
 </li>
-<li><p><code>Relief:Relevant Features</code>是一种著名的过滤式特征选择方法，该方法设计了一个相关统计量来度量特征的<br>重要性。</p>
+<li><p><code>Relief:Relevant Features</code>是一种著名的过滤式特征选择方法，该方法设计了一个相关统计量来度量特征的重要性。</p>
 <ul>
 <li><p>该统计量是一个向量，其中每个分量都对应于一个初始特征。特征子集的重要性则是由该子集中每个特征所对应的相关统计量分量之和来决定的。</p>
 </li>
@@ -850,22 +853,22 @@ g(\mathbb{D}, \mathbb{A})=H(\mathbb{D})-H(\mathbb{D} | \mathbb{A})=H(\mathbb{D})
 </ul>
 </li>
 </ol>
-<pre><code> - 如果属性是连续的，则：
-   $$
-   \operatorname{diff}\left(x_{a, j}, x_{b, j}\right)=\left|x_{a, j}-x_{b, j}\right|
-   $$
-   注意：此时$x_{a, j}, x_{b, j}$需要标准化到` [0,1]` 区间。
-</code></pre><ol>
-<li><p>从公式</p>
+<ul>
+<li>如果属性$j$是连续的，则：</li>
+</ul>
 <script type="math/tex; mode=display">
-\delta_{j}=\sum_{i=1}^{N}\left(-\operatorname{diff}\left(x_{i, j}, x_{n h_{i}, j}\right)^{2}+\operatorname{diff}\left(x_{i, j}, x_{n m_{i}, j}\right)^{2}\right)</script><p>​</p>
-<p>可以看出：</p>
+\operatorname{diff}\left(x_{a, j}, x_{b, j}\right)=\left|x_{a, j}-x_{b, j}\right|</script><p> 注意：此时$x_{a, j}, x_{b, j}$需要标准化到<code>[0,1]</code> 区间。</p>
+<ol>
+<li>从公式<script type="math/tex; mode=display">
+\delta_{j}=\sum_{i=1}^{N}\left(-\operatorname{diff}\left(x_{i, j}, x_{n h_{i}, j}\right)^{2}+\operatorname{diff}\left(x_{i, j}, x_{n m_{i}, j}\right)^{2}\right)</script></li>
+</ol>
+<p>   可以看出：</p>
 <ul>
 <li>如果$\vec{\mathbf{x}}_{i}$与其猜中近邻$\vec{\mathbf{x}}_{n h_{i}}$在属性 上的距离小于$\vec{\mathbf{x}}_{i}$与其猜错近邻$\vec{\mathbf{x}}_{n m_{i}}$的距离，则说明属性$j$对于区分同类与异类样本是有益的，于是增大属性$j$所对应的统计量分量。</li>
 <li>如果$\vec{\mathbf{x}}_{i}$与其猜中近邻$\vec{\mathbf{x}}_{n h_{i}}$在属性 上的距离大于$\vec{\mathbf{x}}_{i}$与其猜错近邻$\vec{\mathbf{x}}_{n m_{i}}$的距离，则说明属性$j$对于区分同类与异类样本是起负作用的，于是减小属性$j$所对应的统计量分量。</li>
 <li>最后对基于不同样本得到的估计结果进行平均，就得到各属性的相关统计量分量。分量值越大，则对应属性的分类能力越强。</li>
 </ul>
-</li>
+<ol>
 <li><p><code>Relief</code> 是为二分类问题设计的，其扩展变体 <code>Relief-F</code> 能处理多分类问题。</p>
 <p>假定数据集$\mathbb{D}$中的样本类别为：$c_{1}, c_{2}, \cdots, c_{K}$ 。对于样本$\vec{\mathbf{x}}_{i}$ ，假设 $\tilde{y}_{i}=c_{k}$。</p>
 <ul>
@@ -880,7 +883,10 @@ g(\mathbb{D}, \mathbb{A})=H(\mathbb{D})-H(\mathbb{D} | \mathbb{A})=H(\mathbb{D})
 </ul>
 </li>
 </ol>
-<h2 id="包裹式选择"><a href="#包裹式选择" class="headerlink" title="包裹式选择"></a>包裹式选择</h2><ol>
+<h2 id="包裹式选择"><a href="#包裹式选择" class="headerlink" title="包裹式选择"></a>包裹式选择</h2><p>包装法的解决思路没有过滤法这么直接，它会选择一个目标函数来一步步的筛选特征。</p>
+<p>最常用的包装法是递归消除特征法(recursive feature elimination,以下简称RFE)。递归消除特征法使用一个机器学习模型来进行多轮训练，每轮训练后，消除若干权值系数的对应的特征，再基于新的特征集进行下一轮训练。在sklearn中，可以使用RFE函数来选择特征。</p>
+<p>我们下面以经典的SVM-RFE算法来讨论这个特征选择的思路。这个算法以支持向量机来做RFE的机器学习模型选择特征。它在第一轮训练的时候，会选择所有的特征来训练，得到了分类的超平面$w \dot x+b=0$后，如果有n个特征，那么RFE-SVM会选择出$w$中分量的平方值$w_i^2$最小的那个序号i对应的特征，将其排除，在第二类的时候，特征数就剩下n-1个了，我们继续用这n-1个特征和输出值来训练SVM，同样的，去掉$w_i^2$最小的那个序号i对应的特征。以此类推，直到剩下的特征数满足我们的需求为止。</p>
+<ol>
 <li><p>与过滤式特征选择不考虑后续学习器不同，包裹式特征选择直接把最终将要使用的学习器的性能作为特征子集的评价准则。其目的就是为给定学习器选择最有利于其性能、量身定做的特征子集。</p>
 <ul>
 <li>优点：由于直接针对特定学习器进行优化，因此从最终学习器性能来看，效果比过滤式特征选择更好。</li>
@@ -914,7 +920,10 @@ g(\mathbb{D}, \mathbb{A})=H(\mathbb{D})-H(\mathbb{D} | \mathbb{A})=H(\mathbb{D})
 </li>
 <li>由于<code>LVW</code>算法中每次特征子集评价都需要训练学习器，计算开销很大，因此算法设置了停止条件控制参数$T$。但是如果初始特征数量很多、$T$设置较大、以及每一轮训练的时间较长， 则很可能算法运行很长时间都不会停止。即：如果有运行时间限制，则有可能给不出解。</li>
 </ul>
-<h2 id="嵌入式选择"><a href="#嵌入式选择" class="headerlink" title="嵌入式选择"></a>嵌入式选择</h2><ol>
+<h2 id="嵌入式选择"><a href="#嵌入式选择" class="headerlink" title="嵌入式选择"></a>嵌入式选择</h2><p>嵌入法也是用机器学习的方法来选择特征，但是它和RFE的区别是它不是通过不停的筛掉特征来进行训练，而是使用的都是特征全集。在sklearn中，使用SelectFromModel函数来选择特征。</p>
+<p>最常用的是使用L1正则化和L2正则化来选择特征。在之前讲到的<a href="http://www.cnblogs.com/pinard/p/6023000.html" target="_blank" rel="noopener">用scikit-learn和pandas学习Ridge回归</a>第6节中，我们讲到正则化惩罚项越大，那么模型的系数就会越小。当正则化惩罚项大到一定的程度的时候，部分特征系数会变成0，当正则化惩罚项继续增大到一定程度时，所有的特征系数都会趋于0. 但是我们会发现一部分特征系数会更容易先变成0，这部分系数就是可以筛掉的。也就是说，我们选择特征系数较大的特征。常用的L1正则化和L2正则化来选择特征的基学习器是逻辑回归。</p>
+<p>此外也可以使用决策树或者GBDT。那么是不是所有的机器学习方法都可以作为嵌入法的基学习器呢？也不是，一般来说，可以得到特征系数coef或者可以得到特征重要度(feature importances)的算法才可以做为嵌入法的基学习器。</p>
+<ol>
 <li><p>在过滤式和包裹式特征选择方法中，特征选择过程与学习器训练过程有明显的分别。</p>
 <p>嵌入式特征选择是将特征选择与学习器训练过程融为一体，两者在同一个优化过程中完成的。即学习器训练过程中自动进行了特征选择。</p>
 </li>
@@ -1077,10 +1086,10 @@ x_{n e w}=x+\operatorname{rand}(0,1) \times(\tilde{x}-x)</script></li>
 <li>首先，对于每个$x_{i} \subset S_{m i n}$确定一系列K-近邻样本集，称该数据集为$S_{i-k N N}$，且$S_{i-k N N} \subset S$；</li>
 </ul>
 <ul>
-<li>然后，对每个样本，判断出最近邻样本集中属于多数类样本的个数，即：$| S_{i-k N N} \cap S_{m a j}$；</li>
+<li>然后，对每个样本，判断出最近邻样本集中属于多数类样本的个数，即：$| S_{i-k N N} \cap S_{m a x}|$；</li>
 </ul>
 <ul>
-<li>最后，选择满足下面不等式的$x_i$: $\frac{k}{2}&lt;\left|S_{i-k N N} \cap S_{m a j}\right|&lt;k$ ,将其加危险集$DANGER$</li>
+<li>最后，选择满足下面不等式的$x_i$: $\frac{k}{2}&lt;\left|S_{i-k N N} \cap S_{m a x}\right|&lt;k$ ,将其加危险集$DANGER$</li>
 </ul>
 <p>对危险集中的每一个样本点（最容易被错分的样本），采用普通的算法<code>SMOTE</code>成新的少数类样本。</p>
 <p><img src="https://i.loli.net/2019/03/31/5ca0885ea5253.png" alt=""></p>
@@ -1299,7 +1308,7 @@ var jiathis_config={
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">37</span>
+                  <span class="site-state-item-count">39</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

@@ -101,7 +101,7 @@
 <meta property="og:image" content="https://i.loli.net/2019/05/10/5cd52c4387f5f.png">
 <meta property="og:image" content="https://i.loli.net/2019/05/10/5cd52da965231.png">
 <meta property="og:image" content="https://i.loli.net/2019/05/10/5cd5382e9d265.png">
-<meta property="og:updated_time" content="2019-06-22T08:55:00.076Z">
+<meta property="og:updated_time" content="2019-10-31T11:39:10.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="神经网络和深度学习—优化算法">
 <meta name="twitter:description" content="写在前面本篇博客是根据我之前在实验室汇报的时候做的一个PPT的内容来写的，有部分内容应该是借鉴了其它一些博客还有一些讲义，由于年代久远，就不贴上参考链接了，如有侵犯内容的，实属抱歉。 引入在介绍神经网路里面的一些优化方法的时候，需要讲一下指数加权平均的思想，因为这与我们后面要将的动量是由很大的关系。 首先我们看一下平均数求法： 比如我们现在有100天的温度值，要求这100天的平均温度值。 24，2">
@@ -394,7 +394,7 @@
 <p>待优化参数：$w$</p>
 <p>目标函数：$f(w)$</p>
 <p>初始学习率：$α$</p>
-<p>然后进行迭代优化。在每个epocht ：</p>
+<p>然后进行迭代优化。在每个epoch ：</p>
 <ul>
 <li>计算目标函数关于当前参数的梯度：$\mathrm{g}_{t}=\nabla \mathrm{f}\left(W_{\mathrm{t}}\right)$</li>
 </ul>
@@ -418,7 +418,9 @@ J(\theta)=\frac{1}{2 m} \sum_{i=1}^{m}\left(y^{i}-h_{\theta}\left(x^{i}\right)\r
 <script type="math/tex; mode=display">
 \theta_{j}^{\prime}=\theta_{j}+\frac{1}{m} \sum_{i=1}^{m}\left(y^{i}-h_{\theta}\left(x^{i}\right)\right) x_{j}^{i}</script><h1 id="随机梯度下降法"><a href="#随机梯度下降法" class="headerlink" title="随机梯度下降法"></a>随机梯度下降法</h1><p>SGD是最速梯度下降法的变种。</p>
 <p>使用最速梯度下降法，将进行N次迭代，直到目标函数收敛，或者到达某个既定的收敛界限。每次迭代都将对m个样本进行计算，计算量大。</p>
-<p>SGD每次迭代仅对一个样本计算梯度，直到收敛。</p>
+<ul>
+<li>SGD每次迭代仅对一个样本计算梯度，直到收敛。</li>
+</ul>
 <script type="math/tex; mode=display">
 \begin{array}{l}{\text { Loop\{ }} \\ {\quad \theta_{j} :=\theta_{j}+\alpha\left(y^{(i)}-h_{\theta}\left((x)^{(i)}\right)\right) x_{j}^{(i)} \text { (for every j } \mathrm{j} )} \\ {\}}\end{array}</script><h1 id="Mini-batch-Gradient-Descent"><a href="#Mini-batch-Gradient-Descent" class="headerlink" title="Mini-batch Gradient Descent"></a>Mini-batch Gradient Descent</h1><p>（1）这是介于BSD和SGD之间的一种优化算法。每次选取一定量的训练样本进行迭代。</p>
 <p>（2）从公式上似乎可以得出以下分析：速度比BSD快，比SGD慢；精度比BSD低，比SGD高。</p>
@@ -632,7 +634,7 @@ var jiathis_config={
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">37</span>
+                  <span class="site-state-item-count">39</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
